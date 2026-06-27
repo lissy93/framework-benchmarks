@@ -1170,7 +1170,6 @@ const W = w`
   }
 `;
 class Re extends y {
-  // eslint-disable-next-line
   static styles = [
     W,
     H,
@@ -1181,7 +1180,6 @@ class Re extends y {
       }
     `
   ];
-  // eslint-disable-next-line
   static properties = {
     searchQuery: { type: String },
     isLoading: { type: Boolean }
@@ -1431,7 +1429,6 @@ const de = (s, e, t) => {
   }
 });
 class Ke extends y {
-  // eslint-disable-next-line
   static styles = [
     W,
     H,
@@ -1442,7 +1439,6 @@ class Ke extends y {
       }
     `
   ];
-  // eslint-disable-next-line
   static properties = {
     forecastData: { type: Object },
     index: { type: Number },
@@ -1453,7 +1449,8 @@ class Ke extends y {
     super(), this.forecastData = null, this.index = 0, this.active = !1, this._expanded = !1;
   }
   render() {
-    if (!this.forecastData) return _``;
+    if (!this.forecastData)
+      return _``;
     const { daily: e, index: t } = this, r = p.formatDate(e.time[t]), i = e.weather_code[t], a = e.temperature_2m_max[t], o = e.temperature_2m_min[t], l = p.getWeatherDescription(i), n = p.getWeatherIcon(i);
     return _`
       <div 
@@ -1536,7 +1533,6 @@ class Ke extends y {
 }
 customElements.define("forecast-item", Ke);
 class Je extends y {
-  // eslint-disable-next-line
   static styles = [
     W,
     H,
@@ -1547,7 +1543,6 @@ class Je extends y {
       }
     `
   ];
-  // eslint-disable-next-line
   static properties = {
     forecastData: { type: Object },
     _activeForecastIndex: { state: !0 }
@@ -1592,7 +1587,6 @@ class Je extends y {
 }
 customElements.define("weather-forecast", Je);
 class Ze extends y {
-  // eslint-disable-next-line
   static styles = [
     W,
     H,
@@ -1603,7 +1597,6 @@ class Ze extends y {
       }
     `
   ];
-  // eslint-disable-next-line
   static properties = {
     weatherData: { type: Object },
     isLoading: { type: Boolean },
@@ -1713,7 +1706,6 @@ class Ze extends y {
 }
 customElements.define("weather-display", Ze);
 class Xe extends y {
-  // eslint-disable-next-line
   static styles = [
     W,
     H,
@@ -1730,7 +1722,6 @@ class Xe extends y {
       }
     `
   ];
-  // eslint-disable-next-line
   static properties = {
     _searchQuery: { state: !0 },
     _isLoading: { state: !0 },
