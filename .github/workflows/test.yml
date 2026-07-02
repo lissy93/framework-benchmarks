@@ -42,32 +42,32 @@ jobs:
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
         with:
           persist-credentials: false
-        
+
       - name: Setup Node.js
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
         with:
           node-version: '22'
           cache: 'npm'
           cache-dependency-path: package-lock.json
-          
+
       - name: Setup Python
         uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: '3.9'
           cache: 'pip'
           cache-dependency-path: scripts/requirements.txt
-          
+
       - name: Install Python dependencies
         run: pip install -r scripts/requirements.txt
-          
+
       - name: Install root dependencies
         run: |
           npm ci
           npx playwright install --with-deps
-          
+
       - name: Run Python setup script
         run: python scripts/setup/main.py --skip-build
-        
+
       - name: Cache node_modules and Playwright browsers
         uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
         with:
@@ -79,7 +79,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-modules-playwright-
             ${{ runner.os }}-node-modules-
-            
+
       - name: Filter changed paths
         if: github.event_name == 'pull_request'
         uses: dorny/paths-filter@fbd0ab8f3e69293af611ebaee6363fc25e6d187d # v4
@@ -135,23 +135,23 @@ jobs:
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
         with:
           persist-credentials: false
-        
+
       - name: Setup Node.js
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
         with:
           node-version: '22'
           cache: 'npm'
-          
+
       - name: Setup Python
         uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: '3.9'
           cache: 'pip'
           cache-dependency-path: scripts/requirements.txt
-          
+
       - name: Install Python dependencies
         run: pip install -r scripts/requirements.txt
-          
+
       - name: Restore dependencies cache
         uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
         with:
@@ -160,7 +160,7 @@ jobs:
             apps/*/node_modules
             ~/.cache/ms-playwright
           key: ${{ runner.os }}-node-modules-playwright-${{ hashFiles('**/package-lock.json') }}
-          
+
       - name: Install dependencies (if cache miss)
         run: |
           if [ ! -d "node_modules" ]; then
@@ -169,10 +169,10 @@ jobs:
           else
             echo "Dependencies cache hit"
           fi
-          
+
       - name: Add node_modules/.bin to PATH
         run: echo "${{ github.workspace }}/node_modules/.bin" >> "$GITHUB_PATH"
-          
+
       - name: Install Playwright browsers (if cache miss)
         run: |
           if [ ! -d ~/.cache/ms-playwright ]; then
@@ -181,7 +181,7 @@ jobs:
           else
             echo "Playwright cache hit - skipping browser installation"
           fi
-          
+
       - name: Verify Playwright installation
         run: |
           echo "Checking @playwright/test availability..."
@@ -191,11 +191,11 @@ jobs:
             echo "❌ @playwright/test not found, forcing npm ci"
             npm ci
           fi
-          
+
       - name: Run setup for project preparation
         run: |
           python scripts/setup/main.py --skip-build
-          
+
       - name: Run tests for ${{ matrix.framework }}
         id: test-run
         uses: nick-fields/retry@ad984534de44a9489a53aefd81eb77f87c70dc60 # v4
@@ -209,7 +209,7 @@ jobs:
             echo "::group::${{ matrix.framework }} Framework Tests"
             npm run test:${{ matrix.framework }} -- --reporter=github --reporter=list
             echo "::endgroup::"
-            
+
       - name: Create detailed result file
         if: always()
         env:
@@ -248,7 +248,7 @@ jobs:
             "playwright_version": "$(npx playwright --version | head -1)"
           }
           EOF
-            
+
       - name: Upload test results (conditional)
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
@@ -259,7 +259,7 @@ jobs:
             test-results/
           if-no-files-found: ignore
           retention-days: 30
-          
+
       - name: Upload test status and details
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
@@ -269,7 +269,7 @@ jobs:
             test-status/${{ matrix.framework }}.txt
             test-details/${{ matrix.framework }}.json
           retention-days: 7
-          
+
       - name: Generate test badge
         if: always()
         env:
@@ -298,7 +298,7 @@ jobs:
           # Generate badge
           badge_url="https://img.shields.io/badge/Tests-${status}-${color}?logo=vitest&logoColor=fff&labelColor=${label_color}"
           curl -o "test-${FRAMEWORK}.svg" "$badge_url"
-          
+
       - name: Upload badge
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
@@ -317,13 +317,13 @@ jobs:
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
         with:
           persist-credentials: false
-        
+
       - name: Setup Node.js
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
         with:
           node-version: '22'
           cache: 'npm'
-          
+
       - name: Download all test status artifacts
         if: always()
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
@@ -331,7 +331,7 @@ jobs:
           pattern: "*-status"
           path: test-artifacts
           merge-multiple: true
-          
+
       - name: Generate test summary
         env:
           FRAMEWORKS_JSON: ${{ needs.setup.outputs.frameworks }}
@@ -340,6 +340,7 @@ jobs:
           ACTOR: ${{ github.actor }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
+          mkdir -p test-artifacts
           cd test-artifacts || exit 1
 
           # Get frameworks and initialize counters
@@ -348,7 +349,22 @@ jobs:
           passed_count=0
           failed_count=0
           total_count=${#frameworks_array[@]}
-          
+
+          # Empty matrix (nothing tested): note it and skip the divide-by-zero below
+          if [[ "$total_count" -eq 0 ]]; then
+            {
+              echo "# 🧪 Test Results Summary"
+              echo ""
+              echo "> ℹ️ No frameworks required testing for this change."
+            } >> "$GITHUB_STEP_SUMMARY"
+            {
+              echo "FAILED_COUNT=0"
+              echo "PASSED_COUNT=0"
+              echo "SUCCESS_RATE=100"
+            } >> "$GITHUB_ENV"
+            exit 0
+          fi
+
           # Generate summary header
           {
             echo "# 🧪 Test Results Summary"
@@ -365,21 +381,21 @@ jobs:
             echo "| Framework | Status | Attempts |"
             echo "|-----------|--------|----------|"
           } >> "$GITHUB_STEP_SUMMARY"
-          
+
           # Process each framework
           for framework in "${frameworks_array[@]}"; do
             status_file="test-status/${framework}.txt"
             details_file="test-details/${framework}.json"
-            
+
             if [[ -f "$status_file" ]]; then
               status=$(cat "$status_file" 2>/dev/null || echo "unknown")
-              
+
               # Parse JSON details
               attempts="1"
               if [[ -f "$details_file" ]] && command -v jq >/dev/null 2>&1; then
                 attempts=$(jq -r '.attempts // "1"' "$details_file" 2>/dev/null || echo "1")
               fi
-              
+
               # Build table row
               if [[ "$status" == "passed" ]]; then
                 icon="✅"
@@ -388,20 +404,20 @@ jobs:
                 icon="❌"
                 failed_count=$((failed_count + 1))
               fi
-              
+
               echo "| **${framework}** | ${icon} **${status^}** | ${attempts} |" >> "$GITHUB_STEP_SUMMARY"
             else
               echo "| **${framework}** | ⚠️ **Missing** | - |" >> "$GITHUB_STEP_SUMMARY"
               failed_count=$((failed_count + 1))
             fi
           done
-          
+
           # Add workflow information
           {
             echo ""
             echo "**Workflow Info:** Triggered by ${EVENT_NAME} on \`${REF_NAME}\` by @${ACTOR} | [View Run](${RUN_URL})"
           } >> "$GITHUB_STEP_SUMMARY"
-          
+
           # Set environment variables
           success_rate=$(( passed_count * 100 / total_count ))
           {
@@ -409,16 +425,16 @@ jobs:
             echo "PASSED_COUNT=$passed_count"
             echo "SUCCESS_RATE=$success_rate"
           } >> "$GITHUB_ENV"
-          
+
           cd ..
-          
+
       - name: Set workflow status
         run: |
           echo "📊 Final Results:"
           echo "   ✅ Passed: $PASSED_COUNT"
           echo "   ❌ Failed: $FAILED_COUNT"
           echo "   📈 Success Rate: $SUCCESS_RATE%"
-          
+
           if [[ "$FAILED_COUNT" -gt 0 ]]; then
             echo ""
             echo "❌ Some framework tests failed."
@@ -430,7 +446,7 @@ jobs:
             echo ""
             echo "✅ All framework tests passed successfully. Party time! 🎉"
           fi
-          
+
       - name: Create status badge data
         if: always()
         env:
@@ -442,13 +458,13 @@ jobs:
           frameworks="$FRAMEWORKS_JSON"
           read -ra frameworks_array <<< "$(echo "$frameworks" | tr -d '[]"' | tr ',' ' ')"
           total_count=${#frameworks_array[@]}
-          
+
           # Determine badge color (with null checks)
           if [[ -z "$FAILED_COUNT" || -z "$SUCCESS_RATE" ]]; then
             badge_color="lightgrey"
             badge_message="unknown"
           elif [ "$FAILED_COUNT" -eq 0 ]; then
-            badge_color="brightgreen" 
+            badge_color="brightgreen"
             badge_message="${PASSED_COUNT}/${total_count} passed"
           elif [ "$SUCCESS_RATE" -ge 80 ]; then
             badge_color="green"
@@ -460,7 +476,7 @@ jobs:
             badge_color="red"
             badge_message="${PASSED_COUNT}/${total_count} passed"
           fi
-          
+
           # Create badge JSON
           cat > badge-data/test-results.json << EOF
           {
@@ -472,7 +488,7 @@ jobs:
             "logoColor": "white"
           }
           EOF
-          
+
       - name: Upload badge data
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
@@ -493,7 +509,7 @@ jobs:
       - name: Checkout with bot token
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
         with:
-          token: ${{ secrets.BOT_TOKEN }}
+          token: ${{ secrets.BOT_TOKEN || secrets.GITHUB_TOKEN }}
           fetch-depth: 0
           persist-credentials: false
 
@@ -506,7 +522,7 @@ jobs:
 
       - name: Commit badges
         env:
-          TOKEN: ${{ secrets.BOT_TOKEN }}
+          TOKEN: ${{ secrets.BOT_TOKEN || secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
         run: |
           git config user.name 'liss-bot'
@@ -517,10 +533,10 @@ jobs:
           git fetch origin badges:badges 2>/dev/null || git checkout --orphan badges
           git checkout badges 2>/dev/null || true
           git pull origin badges 2>/dev/null || true
-          
+
           # Copy badges and commit
           cp badges/*.svg . 2>/dev/null || echo "⚠️ No badge files found"
-          
+
           if git add ./*.svg && git diff --staged --quiet; then
             echo "ℹ️ No badge changes to commit"
           else

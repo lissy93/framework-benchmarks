@@ -133,8 +133,7 @@ jobs:
             assets
           key: setup-cache-${{ github.sha }}
 
-      # workflow_run runs receive a read-only cache token and cannot restore the
-      # setup cache, so rebuild the environment from scratch when it is missing.
+      # workflow_run runs get a read-only cache token, so rebuild on a miss
       - name: Prepare environment (cache miss)
         if: steps.setup-cache.outputs.cache-hit != 'true'
         run: |

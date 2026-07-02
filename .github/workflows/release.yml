@@ -150,7 +150,7 @@ jobs:
           previous_tag: ${{ steps.prev.outputs.tag }}
           fail_on_unmatched_files: true
           files: release-assets/*
-          token: ${{ secrets.BOT_TOKEN != '' && secrets.BOT_TOKEN || secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.BOT_TOKEN || secrets.GITHUB_TOKEN }}
 
       - name: 📋 Job summary
         if: always()
