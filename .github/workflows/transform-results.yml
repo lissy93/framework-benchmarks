@@ -1,7 +1,7 @@
 name: 🔄 Transform Results
 
 on:
-  workflow_run: # zizmor: ignore[dangerous-triggers] internal pipeline step, only runs for main-branch runs of our own trusted Benchmark workflow
+  workflow_run: # zizmor: ignore[dangerous-triggers] internal pipeline step, only runs for main-branch
     workflows: ["📈 Benchmark"]
     types: [completed]
     branches: [main]
@@ -19,7 +19,7 @@ jobs:
     name: Transform & Commit Results
     runs-on: ubuntu-latest
     if: github.event.workflow_run.conclusion == 'success'
-    
+
     steps:
       - name: 📥 Checkout Repository
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
@@ -44,75 +44,68 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           run-id: ${{ github.event.workflow_run.id }}
           pattern: benchmark-results-*
+          merge-multiple: true
           path: ./downloaded-artifacts
 
       - name: 🔍 Verify Downloaded Artifacts
         run: |
           echo "📂 Downloaded artifacts structure:"
           find ./downloaded-artifacts -type f -name "*.json" | head -20 || echo "No JSON files found"
-          
+
           if [ ! -d "./downloaded-artifacts" ] || [ -z "$(find ./downloaded-artifacts -name "*.json" -type f)" ]; then
             echo "❌ No benchmark results found in artifacts"
             exit 1
           fi
-          
+
           echo "✅ Found benchmark results"
 
       - name: 🗂️ Prepare Benchmark Results Directory
         run: | # zizmor: ignore[github-env] COMMIT_TO_MAIN is a parsed true/false boolean from our own artifact, not arbitrary input
-          # Create benchmark-results directory structure
+          # Create a clean benchmark-results directory structure
           mkdir -p benchmark-results
-          
-          # Find and copy the benchmark results from artifacts
-          artifact_dir=$(find ./downloaded-artifacts -name "benchmark-results-*" -type d | head -1)
-          if [ -n "$artifact_dir" ]; then
-            echo "📂 Copying results from: $artifact_dir"
-            # Check if there's a nested benchmark-results directory
-            if [ -d "$artifact_dir/benchmark-results" ]; then
-              cp -r "$artifact_dir/benchmark-results"/* benchmark-results/ 2>/dev/null || true
-            else
-              cp -r "$artifact_dir"/* benchmark-results/ 2>/dev/null || true
-            fi
-            # Try alternative structure if nothing was copied
-            if [ -z "$(find benchmark-results -name "*.json" -type f 2>/dev/null)" ]; then
-              find "$artifact_dir" -name "*.json" -exec cp {} benchmark-results/ \; 2>/dev/null || true
-            fi
-          else
+
+          # Locate the results the benchmark job uploaded
+          src_dir=$(find ./downloaded-artifacts -type d -name benchmark-results | head -1)
+          if [ -n "$src_dir" ]; then
+            echo "📂 Copying results from: $src_dir"
+            cp -r "$src_dir"/. benchmark-results/ 2>/dev/null || true
+          fi
+
+          # Fallback: gather any stray JSON files (excluding the context file)
+          if [ -z "$(find benchmark-results -name "*.json" -type f 2>/dev/null)" ]; then
+            find ./downloaded-artifacts -name "*.json" -type f ! -name workflow-context.json \
+              -exec cp {} benchmark-results/ \; 2>/dev/null || true
+          fi
+
+          if [ -z "$(find benchmark-results -name "*.json" -type f 2>/dev/null)" ]; then
             echo "❌ Could not find benchmark results in artifacts"
             exit 1
           fi
-          
-          # Read workflow context to determine if we should skip main branch commit  
-          context_file=""
-          if [ -f "benchmark-results/workflow-context.json" ]; then
-            context_file="benchmark-results/workflow-context.json"
-          elif [ -f "$artifact_dir/workflow-context.json" ]; then
-            context_file="$artifact_dir/workflow-context.json"
-          fi
-          
+
+          # Read workflow context to determine if we should commit to main
+          context_file=$(find ./downloaded-artifacts benchmark-results -name workflow-context.json -type f 2>/dev/null | head -1)
           if [ -n "$context_file" ]; then
             COMMIT_TO_MAIN=$(python3 -c "import json; print(json.load(open('$context_file')).get('commit_to_main', 'false'))" 2>/dev/null || echo "false")
             echo "COMMIT_TO_MAIN=$COMMIT_TO_MAIN" >> "$GITHUB_ENV"
             echo "📋 Workflow context: commit_to_main=$COMMIT_TO_MAIN"
-            rm "$context_file" 2>/dev/null || true  # Clean up
           else
             echo "COMMIT_TO_MAIN=false" >> "$GITHUB_ENV"
             echo "📋 No workflow context found, defaulting to skip main branch commit"
           fi
-          
+
           echo "📊 Final benchmark-results structure:"
           find benchmark-results -type f -name "*.json" | head -10
 
       - name: 🔄 Transform Results
         run: |
           echo "🔄 Transforming benchmark results..."
-          
+
           # Ensure results directory exists
           mkdir -p results
-          
+
           # Set PYTHONPATH for our transform scripts
           export PYTHONPATH="$PWD:$PWD/scripts"
-          
+
           # Transform results with averaging (since benchmarks might run multiple executions)
           python scripts/transform/benchmark_results.py \
             --format both \
@@ -164,15 +157,15 @@ jobs:
           if [ -d "benchmark-results" ]; then cp -r benchmark-results /tmp/results-data/ 2>/dev/null || true; fi
           if [ -d "results" ]; then cp -r results /tmp/results-data/ 2>/dev/null || true; fi
           if [ -d "website/static/charts" ]; then cp -r website/static/charts /tmp/results-data/ 2>/dev/null || true; fi
-          
+
           # Switch to results branch
           git fetch origin results 2>/dev/null || echo "Results branch doesn't exist yet"
-          
+
           # Aggressively clean working directory to avoid checkout conflicts
           git add -A
           git reset --hard HEAD
           git clean -fdx
-          
+
           # Handle results branch carefully to avoid main branch contamination
           if git show-ref --verify --quiet refs/remotes/origin/results; then
             # Remote results branch exists - check if it's clean (results-only)
@@ -180,7 +173,7 @@ jobs:
             git rm -rf . 2>/dev/null || true
             git fetch origin results:temp-results
             git checkout temp-results
-            
+
             # Check if this branch has main branch files (contamination check)
             if [ -f ".github/README.md" ] || [ -f "package.json" ]; then
               echo "🧹 Results branch appears contaminated with main branch files, creating clean branch"
@@ -201,7 +194,7 @@ jobs:
 
           # Set up directory structure
           mkdir -p raw summary charts stats
-          
+
           # Copy files from temporary location to organized structure
           if [ -d "/tmp/results-data/benchmark-results" ]; then cp -r /tmp/results-data/benchmark-results/* raw/ 2>/dev/null || true; fi
           if [ -f "/tmp/results-data/results/summary.json" ]; then cp /tmp/results-data/results/summary.json "summary/summary-${TIMESTAMP}.json" 2>/dev/null || true; fi
@@ -211,7 +204,7 @@ jobs:
           if [ -d "/tmp/results-data/charts" ]; then cp -r /tmp/results-data/charts/* charts/ 2>/dev/null || true; fi
           if [ -f "/tmp/results-data/results/framework-stats.json" ]; then cp /tmp/results-data/results/framework-stats.json "stats/stats-${TIMESTAMP}.json" 2>/dev/null || true; fi
           if [ -f "/tmp/results-data/results/framework-stats.json" ]; then cp /tmp/results-data/results/framework-stats.json stats/framework-stats.json 2>/dev/null || true; fi
-          
+
           # Commit and push results branch
           if git add raw/ summary/ charts/ stats/ && ! git diff --staged --quiet; then
             git commit -m "chore: update results from run #${{ github.event.workflow_run.run_number }} [${TIMESTAMP}]"
@@ -235,7 +228,7 @@ jobs:
 
           # Switch back to main branch
           git checkout main
-          
+
           if [ "$COMMIT_TO_MAIN" = "true" ]; then
             git add results/ website/static/chart*.json website/static/charts/ .github/README.md || true
             if ! git diff --cached --quiet; then

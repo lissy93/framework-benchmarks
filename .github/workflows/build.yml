@@ -16,7 +16,7 @@ on:
       - 'website/**'
       - 'frameworks.json'
       - 'config.json'
-  workflow_run: # zizmor: ignore[dangerous-triggers] internal pipeline step, only runs for main-branch runs of our own trusted workflow
+  workflow_run: # zizmor: ignore[dangerous-triggers] internal pipeline step, only runs for main-branch runs
     workflows: ["🔄 Transform Results"]
     types: [completed]
     branches: [main]
@@ -48,23 +48,23 @@ jobs:
         with:
           node-version: '22'
           cache: 'npm'
-          
+
       - name: Setup Python
         uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: '3.9'
           cache: 'pip'
           cache-dependency-path: scripts/requirements.txt
-          
+
       - name: Install dependencies and setup project
         run: |
           pip install -r scripts/requirements.txt
           npm ci
           python scripts/setup/main.py --skip-build
-          
+
       - name: Verify setup
         run: python scripts/verify/check.py
-        
+
       - name: Cache setup for build jobs
         uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
         with:
@@ -75,7 +75,7 @@ jobs:
             apps/*/static
             assets
           key: setup-cache-${{ github.sha }}
-        
+
       - name: Determine frameworks to build
         id: matrix
         env:
@@ -112,11 +112,17 @@ jobs:
           python-version: '3.9'
           cache: 'pip'
           cache-dependency-path: scripts/requirements.txt
-          
+
       - name: Install Python dependencies
         run: pip install -r scripts/requirements.txt
-        
+
+      - name: Setup Node.js
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
+        with:
+          node-version: '22'
+
       - name: Restore setup cache
+        id: setup-cache
         uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
         with:
           path: |
@@ -126,8 +132,15 @@ jobs:
             apps/*/static
             assets
           key: setup-cache-${{ github.sha }}
-          fail-on-cache-miss: true
-        
+
+      # workflow_run runs receive a read-only cache token and cannot restore the
+      # setup cache, so rebuild the environment from scratch when it is missing.
+      - name: Prepare environment (cache miss)
+        if: steps.setup-cache.outputs.cache-hit != 'true'
+        run: |
+          npm ci
+          python scripts/setup/main.py --skip-build
+
       - name: Build ${{ matrix.framework }}
         id: build-run
         env:
@@ -171,7 +184,7 @@ jobs:
 
           badge_url="https://img.shields.io/badge/Build-${status}-${color}?logo=rocket&logoColor=fff&labelColor=${label_color}"
           curl -o "build-${FRAMEWORK}.svg" "$badge_url"
-          
+
       - name: Upload badge
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
@@ -197,11 +210,17 @@ jobs:
           python-version: '3.9'
           cache: 'pip'
           cache-dependency-path: scripts/requirements.txt
-          
+
       - name: Install Python dependencies
         run: pip install -r scripts/requirements.txt
-        
+
+      - name: Setup Node.js
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
+        with:
+          node-version: '22'
+
       - name: Restore setup cache
+        id: setup-cache
         uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
         with:
           path: |
@@ -211,13 +230,18 @@ jobs:
             apps/*/static
             assets
           key: setup-cache-${{ github.sha }}
-          fail-on-cache-miss: true
-          
+
+      - name: Prepare environment (cache miss)
+        if: steps.setup-cache.outputs.cache-hit != 'true'
+        run: |
+          npm ci
+          python scripts/setup/main.py --skip-build
+
       - name: Build all frameworks and generate website
         run: |
           echo "Building all frameworks for comparison website..."
-          npm run build -- --static-site 
-          
+          npm run build -- --static-site
+
       - name: Upload website artifacts
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
@@ -285,7 +309,7 @@ jobs:
 
           # Commit only if there are changes
           git add -A
-          
+
           if git diff --staged --quiet; then
             echo "ℹ️ No website changes to deploy"
           else
@@ -329,10 +353,10 @@ jobs:
           git fetch origin badges:badges 2>/dev/null || git checkout --orphan badges
           git checkout badges 2>/dev/null || true
           git pull origin badges 2>/dev/null || true
-          
+
           # Copy badges and commit
           cp badges/*.svg . 2>/dev/null || echo "⚠️ No badge files found"
-          
+
           if git add ./*.svg && git diff --staged --quiet; then
             echo "ℹ️ No badge changes to commit"
           else
