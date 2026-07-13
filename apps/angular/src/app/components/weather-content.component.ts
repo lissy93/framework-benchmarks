@@ -23,5 +23,5 @@ import { ForecastComponent } from './forecast.component';
 })
 export class WeatherContentComponent {
   readonly isVisible = input(false);
-  readonly weatherData = input<WeatherData | null>(null);
+  readonly weatherData = input<WeatherData | null | undefined>(null);
 }

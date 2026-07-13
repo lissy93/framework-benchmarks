@@ -29,7 +29,7 @@ export class ForecastComponent {
   private readonly elementRef = inject(ElementRef<HTMLElement>);
   private readonly injector = inject(Injector);
 
-  readonly weatherData = input<WeatherData | null>(null);
+  readonly weatherData = input<WeatherData | null | undefined>(null);
   readonly activeForecastIndex = signal<number | null>(null);
 
   onToggleForecast(index: number): void {

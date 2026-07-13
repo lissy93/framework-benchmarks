@@ -75,7 +75,7 @@ import { WeatherUtils } from '../utils/weather.utils';
   `
 })
 export class CurrentWeatherComponent {
-  readonly weatherData = input<WeatherData | null>(null);
+  readonly weatherData = input<WeatherData | null | undefined>(null);
 
   readonly locationLabel = computed(() => {
     const weatherData = this.weatherData();

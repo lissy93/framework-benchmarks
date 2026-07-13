@@ -22,25 +22,23 @@ import { WeatherContentComponent } from './components/weather-content.component'
 
     <main class="main">
       <div class="container">
-        @let currentState = weatherStateService.state();
-
         <app-search-form
-          [isLoading]="currentState.isLoading"
-          (search)="weatherStateService.loadWeather($event)"
+          [isLoading]="weatherState.weather.isLoading()"
+          (search)="weatherState.loadWeather($event)"
         ></app-search-form>
 
         <div class="weather-container" data-testid="weather-container">
-          <app-loading-state [isVisible]="currentState.isLoading"></app-loading-state>
+          <app-loading-state [isVisible]="weatherState.weather.isLoading()"></app-loading-state>
 
           <app-error-state
-            [isVisible]="!!currentState.error && !currentState.isLoading"
-            [message]="currentState.error"
+            [isVisible]="!!weatherState.weather.error() && !weatherState.weather.isLoading()"
+            [message]="$any(weatherState.weather.error())?.message"
           ></app-error-state>
 
           @defer (on immediate) {
             <app-weather-content
-              [isVisible]="!!currentState.weatherData && !currentState.isLoading && !currentState.error"
-              [weatherData]="currentState.weatherData"
+              [isVisible]="weatherState.weather.hasValue() && !weatherState.weather.isLoading() && !weatherState.weather.error()"
+              [weatherData]="weatherState.weather.value()"
             ></app-weather-content>
           }
         </div>
@@ -60,5 +58,5 @@ import { WeatherContentComponent } from './components/weather-content.component'
   `
 })
 export class AppComponent {
-  protected readonly weatherStateService = inject(WeatherStateService);
+  protected readonly weatherState = inject(WeatherStateService);
 }
