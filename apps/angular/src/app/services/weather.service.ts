@@ -143,43 +143,7 @@ export class WeatherService {
             country: location.country
           }))
         )
-      ),
-      catchError(error => {
-        console.error('Weather service error:', error);
-        return throwError(() => error);
-      })
+      )
     );
-  }
-
-  getCurrentLocationWeather(): Observable<WeatherData> {
-    return new Observable(subscriber => {
-      if (!navigator.geolocation) {
-        subscriber.error(new Error('Geolocation not supported'));
-        return;
-      }
-
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          this.getWeatherData(latitude, longitude).subscribe({
-            next: (weather) => {
-              const weatherWithLocation = {
-                ...weather,
-                locationName: 'Current Location'
-              };
-              subscriber.next(weatherWithLocation);
-              subscriber.complete();
-            },
-            error: (error) => subscriber.error(error)
-          });
-        },
-        (error) => subscriber.error(error),
-        {
-          timeout: 10000,
-          enableHighAccuracy: false,
-          maximumAge: 300000 // 5 minutes
-        }
-      );
-    });
   }
 }

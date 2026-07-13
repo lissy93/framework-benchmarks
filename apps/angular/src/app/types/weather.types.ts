@@ -35,9 +35,3 @@ export interface GeocodingResult {
   name: string;
   country?: string;
 }
-
-export interface AppState {
-  weatherData: WeatherData | null;
-  isLoading: boolean;
-  error: string | null;
-}
