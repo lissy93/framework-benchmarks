@@ -26,7 +26,7 @@ export class WeatherService {
   }
 
   private getMockData(): Observable<WeatherData> {
-    return this.http.get<WeatherData>('/mocks/weather-data.json').pipe(
+    return this.http.get<WeatherData>('/mocks/weather-data.json', { priority: 'high' }).pipe(
       delay(this.isTestEnvironment() ? 200 : 0), // Add delay in test environments
       catchError(error => {
         console.error('Error loading mock data:', error);
@@ -95,7 +95,8 @@ export class WeatherService {
         count: '1',
         language: 'en',
         format: 'json'
-      }
+      },
+      priority: 'high'
     }).pipe(
       map((response: { results: GeocodingResult[] }) => {
         if (!response.results || response.results.length === 0) {
@@ -122,7 +123,8 @@ export class WeatherService {
         daily: 'temperature_2m_max,temperature_2m_min,weather_code,sunrise,sunset,rain_sum,uv_index_max,precipitation_probability_max',
         current: 'temperature_2m,relative_humidity_2m,apparent_temperature,is_day,snowfall,showers,rain,precipitation,weather_code,cloud_cover,pressure_msl,surface_pressure,wind_direction_10m,wind_gusts_10m,wind_speed_10m',
         timezone: 'GMT'
-      }
+      },
+      priority: 'high'
     }).pipe(
       catchError(error => {
         console.error('Weather API error:', error);
