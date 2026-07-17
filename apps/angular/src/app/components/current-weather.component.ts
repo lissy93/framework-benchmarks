@@ -5,8 +5,7 @@ import { WeatherUtils } from '../utils/weather.utils';
 @Component({
   selector: 'app-current-weather',
   template: `
-    @if (weatherData(); as weatherData) {
-      <section class="current-section">
+    <section class="current-section">
       <h2 class="section-title">Current Weather</h2>
       <div class="weather-card" data-testid="current-weather">
         <div class="current-weather">
@@ -70,71 +69,57 @@ import { WeatherUtils } from '../utils/weather.utils';
           </div>
         </div>
       </div>
-      </section>
-    }
+    </section>
   `
 })
 export class CurrentWeatherComponent {
-  readonly weatherData = input<WeatherData | null | undefined>(null);
+  readonly weatherData = input.required<WeatherData>();
 
   readonly locationLabel = computed(() => {
-    const weatherData = this.weatherData();
-    if (!weatherData) {
-      return '';
-    }
-
-    return weatherData.country
-      ? `${weatherData.locationName}, ${weatherData.country}`
-      : (weatherData.locationName ?? '');
+    const data = this.weatherData();
+    return data.country
+      ? `${data.locationName}, ${data.country}`
+      : (data.locationName ?? '');
   });
 
   readonly weatherIcon = computed(() => {
-    const current = this.weatherData()?.current;
-    return current ? WeatherUtils.getWeatherIcon(current.weather_code, current.is_day) : '';
+    const current = this.weatherData().current;
+    return WeatherUtils.getWeatherIcon(current.weather_code, current.is_day);
   });
 
   readonly currentTemperature = computed(() => {
-    const current = this.weatherData()?.current;
-    return current ? WeatherUtils.formatTemperature(current.temperature_2m) : '';
+    return WeatherUtils.formatTemperature(this.weatherData().current.temperature_2m);
   });
 
   readonly conditionClass = computed(() => {
-    const current = this.weatherData()?.current;
-    return current ? WeatherUtils.getConditionClass(current.weather_code) : '';
+    return WeatherUtils.getConditionClass(this.weatherData().current.weather_code);
   });
 
   readonly weatherDescription = computed(() => {
-    const current = this.weatherData()?.current;
-    return current ? WeatherUtils.getWeatherDescription(current.weather_code) : '';
+    return WeatherUtils.getWeatherDescription(this.weatherData().current.weather_code);
   });
 
   readonly apparentTemperature = computed(() => {
-    const current = this.weatherData()?.current;
-    return current ? WeatherUtils.formatTemperature(current.apparent_temperature) : '';
+    return WeatherUtils.formatTemperature(this.weatherData().current.apparent_temperature);
   });
 
   readonly humidity = computed(() => {
-    const current = this.weatherData()?.current;
-    return current ? WeatherUtils.formatPercentage(current.relative_humidity_2m) : '';
+    return WeatherUtils.formatPercentage(this.weatherData().current.relative_humidity_2m);
   });
 
   readonly windSpeed = computed(() => {
-    const current = this.weatherData()?.current;
-    return current ? WeatherUtils.formatWindSpeed(current.wind_speed_10m) : '';
+    return WeatherUtils.formatWindSpeed(this.weatherData().current.wind_speed_10m);
   });
 
   readonly pressure = computed(() => {
-    const current = this.weatherData()?.current;
-    return current ? WeatherUtils.formatPressure(current.pressure_msl) : '';
+    return WeatherUtils.formatPressure(this.weatherData().current.pressure_msl);
   });
 
   readonly cloudCover = computed(() => {
-    const current = this.weatherData()?.current;
-    return current ? WeatherUtils.formatPercentage(current.cloud_cover) : '';
+    return WeatherUtils.formatPercentage(this.weatherData().current.cloud_cover);
   });
 
   readonly windDirection = computed(() => {
-    const current = this.weatherData()?.current;
-    return current ? WeatherUtils.getWindDirection(current.wind_direction_10m) : '';
+    return WeatherUtils.getWindDirection(this.weatherData().current.wind_direction_10m);
   });
 }
