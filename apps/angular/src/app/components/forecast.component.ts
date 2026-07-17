@@ -1,4 +1,4 @@
-import { Component, ElementRef, Injector, afterNextRender, inject, input, signal } from '@angular/core';
+import { Component, ElementRef, Injector, afterNextRender, inject, input, signal, viewChildren } from '@angular/core';
 import type { WeatherData } from '../types/weather.types';
 import { ForecastItemComponent } from './forecast-item.component';
 
@@ -13,6 +13,7 @@ import { ForecastItemComponent } from './forecast-item.component';
           @let _weatherData = weatherData();
           @for (date of _weatherData.daily.time; track date; let i = $index) {
             <app-forecast-item
+              #forecastItem
               [daily]="_weatherData.daily"
               [index]="i"
               [isActive]="activeForecastIndex() === i"
@@ -25,8 +26,8 @@ import { ForecastItemComponent } from './forecast-item.component';
   `
 })
 export class ForecastComponent {
-  private readonly elementRef = inject(ElementRef<HTMLElement>);
   private readonly injector = inject(Injector);
+  private readonly forecastItems = viewChildren<ElementRef<HTMLElement>>('forecastItem');
 
   readonly weatherData = input.required<WeatherData>();
   readonly activeForecastIndex = signal<number | null>(null);
@@ -37,9 +38,9 @@ export class ForecastComponent {
     } else {
       this.activeForecastIndex.set(index);
       afterNextRender(() => {
-        const activeElement = (this.elementRef.nativeElement as HTMLElement).querySelector('.forecast-item.active');
-        if (activeElement) {
-          activeElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        const activeEl = this.forecastItems()[index]?.nativeElement;
+        if (activeEl) {
+          activeEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
       }, { injector: this.injector });
     }
