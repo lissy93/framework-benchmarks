@@ -1,5 +1,5 @@
 {
-  "generated_at": "2025-08-29T09:29:32Z",
+  "generated_at": "2026-07-23T08:30:52Z",
   "items": [
     {
       "id": "react",
@@ -77,6 +77,20 @@
       "implementation": "#### Hyperscript DOM Creation\nThe [`main.js`](https://github.com/Lissy93/framework-benchmarks/blob/main/apps/vanjs/src/main.js) uses VanJS's hyperscript syntax with `const { div, h1, p } = van.tags` to create DOM elements functionally without JSX or templates.\n\n#### Reactive State with van.state\nVanJS provides reactive state through `van.state('initial')` which returns an object with a `.val` property. Changes to `state.val` automatically trigger re-renders of dependent DOM.\n\n#### Functional Component Pattern\nComponents are plain JavaScript functions that return DOM elements. The `WeatherApp` class demonstrates organizing complex UI logic while maintaining VanJS's functional approach.\n\n#### Direct DOM Manipulation\nUnlike virtual DOM frameworks, VanJS directly manipulates the real DOM, making it extremely lightweight (~1KB) while maintaining reactivity through state bindings.\n\n#### Template-less Architecture\nNo templates, JSX, or HTML strings - everything is created through JavaScript functions, providing full IDE support and type safety for DOM creation.",
       "about": "VanJS is an ultra-tiny library for writing reactive UIs with plain functions. \nNo build step, no virtual DOM, just direct DOM manipulation with reactivity built in. \nIt’s surprisingly powerful for its size and is good for small apps or embedded widgets. \nThink of it as a modern alternative to jQuery that actually plays nice with modern JS.",
       "thoughts": "VanJS is impressively tiny - just 1KB of runtime with zero dependencies. It's basically \"what if we took the reactive parts of modern frameworks and stripped away everything else?\" The result is surprisingly elegant for simple applications, but you'll quickly bump into its limitations.\n\nThe functional approach is refreshing after dealing with classes and complex component lifecycles. `van.state(initialValue)` creates reactive state, `van.tags.div()` creates DOM elements, and everything just works. Our weather app's temperature display is literally `van.tags.span(temperature)` - when `temperature` changes, the DOM updates automatically.\n\nBut the simplicity comes with trade-offs. There's no component abstraction beyond functions, no templating system, no event system. You're essentially building a reactive version of vanilla DOM manipulation. It works for basic interactivity but gets unwieldy fast.\n\nThe DOM creation syntax is functional but verbose: `van.tags.div({class: \"weather-card\"}, van.tags.h2(\"Weather\"))`. Coming from JSX or template languages, it feels like writing assembly code. You'll miss the declarative nature of modern frameworks.\n\nVanJS works well for simple enhancements where you need just a touch of reactivity without the framework overhead. I've used it for mini apps, like [raid-calculator](https://github.com/lissy93/raid-calculator). But for anything substantial, you'll spend more time fighting the limitations than building features. It's an interesting experiment in minimalism, but modern frameworks exist for good reasons."
+    },
+    {
+      "id": "lume-js",
+      "name": "Lume.js",
+      "implementation": null,
+      "about": null,
+      "thoughts": null
+    },
+    {
+      "id": "astro",
+      "name": "Astro",
+      "implementation": "#### Zero JavaScript by Default\nAstro renders every `.astro` component to static HTML at build time and ships no runtime. The entire UI shell - header, search form, weather card scaffold, forecast container - arrives as plain markup with no hydration cost.\n\n#### A Single Client Island\nThe only JavaScript in the bundle comes from one `<script>` tag in [`index.astro`](https://github.com/Lissy93/framework-benchmarks/blob/main/apps/astro/src/pages/index.astro), which imports [`weather-app.js`](https://github.com/Lissy93/framework-benchmarks/blob/main/apps/astro/src/scripts/weather-app.js). Astro bundles and hashes it automatically. All state, fetching and DOM updates live in that one module.\n\n#### Component Props Without a Runtime\nComponents like [`CurrentWeather.astro`](https://github.com/Lissy93/framework-benchmarks/blob/main/apps/astro/src/components/CurrentWeather.astro) use frontmatter to map over a list of weather detail tiles at build time. The loop runs during the build, not in the browser, so the output is flat HTML.\n\n#### Layout Composition with Slots\n[`Layout.astro`](https://github.com/Lissy93/framework-benchmarks/blob/main/apps/astro/src/layouts/Layout.astro) holds the document shell and stylesheet links, and pages compose into it through `<slot />`.\n\n#### Relative Asset Paths for Sub-path Hosting\n[`astro.config.mjs`](https://github.com/Lissy93/framework-benchmarks/blob/main/apps/astro/astro.config.mjs) sets `build.assetsPrefix: '.'` so the emitted `_astro/` URLs stay relative. This lets the same build work at the site root and when served under `/astro/app/` by the benchmark server.",
+      "about": null,
+      "thoughts": null
     },
     {
       "id": "vanilla",

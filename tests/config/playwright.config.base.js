@@ -92,6 +92,13 @@ function createConfig(framework) {
         command: 'npm run dev:lume-js',
         url: 'http://localhost:3000/',
       }
+    },
+    astro: {
+      baseURL: 'http://localhost:3000/?mock=true',
+      webServer: {
+        command: 'npm run dev:astro',
+        url: 'http://localhost:3000/',
+      }
     }
   };
 

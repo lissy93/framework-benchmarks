@@ -28,7 +28,7 @@ def build_framework(framework_id: str, framework_data: dict, app_dir: Path) -> T
     
     try:
         # Use npm run build for most frameworks
-        cmd = ["npm", "run", "build"] if command in ["vite build", "ng build"] else command
+        cmd = ["npm", "run", "build"] if command in ["vite build", "ng build", "astro build"] else command
         result = subprocess.run(
             cmd,
             shell=isinstance(cmd, str),

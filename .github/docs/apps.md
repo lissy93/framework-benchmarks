@@ -1,6 +1,6 @@
 # Framework Applications
 
-This project contains the same weather application built using 12 different JavaScript frameworks. Each implementation provides identical functionality but uses the specific patterns and approaches of its framework.
+This project contains the same weather application built using 14 different JavaScript frameworks. Each implementation provides identical functionality but uses the specific patterns and approaches of its framework.
 
 ## Available Frameworks
 
@@ -17,6 +17,8 @@ The project includes implementations for:
 **Alpine.js** - Minimal framework with HTML-first approach
 **Lit** - Web Components with efficient updates
 **VanJS** - Ultra-small vanilla framework
+**Lume.js** - Minimal reactive state library with no build step
+**Astro** - Static-first with zero JavaScript by default and opt-in islands
 **Vanilla** - Pure JavaScript without any framework
 
 Each app lives in its own directory under `apps/{framework}/` and can be developed, built, and tested independently.

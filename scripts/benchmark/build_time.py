@@ -136,6 +136,8 @@ class BuildTimeRunner(BenchmarkRunner):
                 build_command = "npx vite build"
             elif build_command == "ng build":
                 build_command = "npx ng build"
+            elif build_command == "astro build":
+                build_command = "npx astro build"
             # Find apps directory - look from project root
             apps_dir = None
             script_dir = Path(__file__).parent
