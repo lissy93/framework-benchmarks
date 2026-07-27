@@ -7,7 +7,7 @@
   <br>
   <b><a href="/">🚀 Demo</a> ● <a href="https://frontend-framework-benchmarks.as93.net">📊 Results</a></b>
   <br><br>
-  <a href="https://astro.build/" target="_blank"><img src="https://img.shields.io/badge/Framework-Astro-F041FF?logo=astro&logoColor=fff&labelColor=F041FF" /></a>
+  <a href="https://astro.build/" target="_blank"><img src="https://img.shields.io/badge/Framework-Astro-BC52EE?logo=astro&logoColor=fff&labelColor=BC52EE" /></a>
   <a href="https://github.com/Lissy93/framework-benchmarks/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-AE56FF?logo=googledocs&logoColor=fff&labelColor=8A2BE2" /></a>
   <a href="https://github.com/lissy93"><img src="https://img.shields.io/badge/Author-Lissy93-EA4AAA?logo=githubsponsors&logoColor=fff&labelColor=E31591" /></a>
 </p>
