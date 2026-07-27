@@ -30,7 +30,8 @@ FRAMEWORK_COLORS = {
     'lit': '#324FFF',
     'vanilla': '#F7DF1E',
     'jquery': '#0769AD',
-    'vanjs': '#FF6B35'
+    'vanjs': '#FF6B35',
+    'astro': '#BC52EE'
 }
 
 # Color mappings for specific chart metrics

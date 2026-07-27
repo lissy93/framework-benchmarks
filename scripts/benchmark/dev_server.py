@@ -273,6 +273,7 @@ class DevServerRunner(BenchmarkRunner):
                     "jquery": 5179,     # Vite + 6
                     "lit": 5180,        # Vite + 7
                     "vanjs": 5181,      # Vite + 8
+                    "astro": 5182,      # Vite + 9
                 }
                 
                 assigned_port = framework_ports.get(framework, 5190)
@@ -299,6 +300,8 @@ class DevServerRunner(BenchmarkRunner):
             if dev_command == "vite" or dev_command.startswith("vite "):
                 dev_command = "npx " + dev_command
             elif dev_command.startswith("ng "):
+                dev_command = "npx " + dev_command
+            elif dev_command.startswith("astro "):
                 dev_command = "npx " + dev_command
             
             # Handle frameworks without dev servers
