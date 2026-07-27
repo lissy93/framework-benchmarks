@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-27T06:17:23Z",
+  "generated_at": "2026-07-27T17:44:12Z",
   "items": [
     {
       "id": "react",
@@ -82,6 +82,13 @@
       "id": "lume-js",
       "name": "Lume.js",
       "implementation": null,
+      "about": null,
+      "thoughts": null
+    },
+    {
+      "id": "astro",
+      "name": "Astro",
+      "implementation": "#### Zero JavaScript by Default\nAstro renders every `.astro` component to static HTML at build time and ships no runtime. The entire UI shell - header, search form, weather card scaffold, forecast container - arrives as plain markup with no hydration cost.\n\n#### A Single Client Island\nThe only JavaScript in the bundle comes from one `<script>` tag in [`index.astro`](https://github.com/Lissy93/framework-benchmarks/blob/main/apps/astro/src/pages/index.astro), which imports [`weather-app.js`](https://github.com/Lissy93/framework-benchmarks/blob/main/apps/astro/src/scripts/weather-app.js). Astro bundles and hashes it automatically. All state, fetching and DOM updates live in that one module.\n\n#### Component Props Without a Runtime\nComponents like [`CurrentWeather.astro`](https://github.com/Lissy93/framework-benchmarks/blob/main/apps/astro/src/components/CurrentWeather.astro) use frontmatter to map over a list of weather detail tiles at build time. The loop runs during the build, not in the browser, so the output is flat HTML.\n\n#### Layout Composition with Slots\n[`Layout.astro`](https://github.com/Lissy93/framework-benchmarks/blob/main/apps/astro/src/layouts/Layout.astro) holds the document shell and stylesheet links, and pages compose into it through `<slot />`.\n\n#### Relative Asset Paths for Sub-path Hosting\n[`astro.config.mjs`](https://github.com/Lissy93/framework-benchmarks/blob/main/apps/astro/astro.config.mjs) sets `build.assetsPrefix: '.'` so the emitted `_astro/` URLs stay relative. This lets the same build work at the site root and when served under `/astro/app/` by the benchmark server.",
       "about": null,
       "thoughts": null
     },

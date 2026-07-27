@@ -139,6 +139,9 @@
                         <a href="/lume-js/" class="dropdown-item" role="menuitem">
                             Lume.js
                         </a>
+                        <a href="/astro/" class="dropdown-item" role="menuitem">
+                            Astro
+                        </a>
                         <a href="/vanilla/" class="dropdown-item" role="menuitem">
                             Vanilla JS
                         </a>
@@ -352,6 +355,20 @@
             <div class="framework-fallback" style="display: none;">L</div>
         </a>
         <a
+            href="/astro/"
+            class="framework-card"
+            style="--fw-color: #BC52EE;"
+            data-framework="astro"
+            title="Astro"
+        >
+            <img class="framework-icon" 
+                 width="32" 
+                 src="https://cdn.simpleicons.org/astro"
+                 alt="🚀"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <div class="framework-fallback" style="display: none;">A</div>
+        </a>
+        <a
             href="/vanilla/"
             class="framework-card"
             style="--fw-color: #F7DF1E;"
@@ -489,6 +506,15 @@
                        checked>
                 <span class="checkbox-indicator"></span>
                 <span class="framework-label">Lume.js</span>
+            </label>
+            <label class="framework-checkbox" style="--fw-color: #BC52EE;">
+                <input type="checkbox" 
+                       class="framework-toggle" 
+                       id="toggle-astro" 
+                       data-framework="astro"
+                       checked>
+                <span class="checkbox-indicator"></span>
+                <span class="framework-label">Astro</span>
             </label>
             <label class="framework-checkbox" style="--fw-color: #F7DF1E;">
                 <input type="checkbox" 
@@ -728,6 +754,15 @@
             <div class="framework-fallback" style="display: none;">L</div>
             <div class="framework-name">Lume.js</div>
         </a>
+        <a href="/astro/" class="framework-card" style="--fw-color: #BC52EE;" data-framework="astro">
+            <img class="framework-icon" 
+                 width="64" 
+                 src="https://cdn.simpleicons.org/astro"
+                 alt="🚀"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <div class="framework-fallback" style="display: none;">A</div>
+            <div class="framework-name">Astro</div>
+        </a>
         <a href="/vanilla/" class="framework-card" style="--fw-color: #F7DF1E;" data-framework="vanilla">
             <img class="framework-icon" 
                  width="64" 
@@ -791,6 +826,10 @@
         <li style="--fw-color: #7C3AED;">
             <h4>Lume.js</h4>
             <code>http://localhost:3000/lume-js/app?mock=true</code>
+        </li>
+        <li style="--fw-color: #BC52EE;">
+            <h4>Astro</h4>
+            <code>http://localhost:3000/astro/app?mock=true</code>
         </li>
         <li style="--fw-color: #F7DF1E;">
             <h4>Vanilla JS</h4>
