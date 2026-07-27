@@ -156,15 +156,19 @@ def update_readme(framework: Dict, content_sections: Dict[str, str]) -> None:
     readme_path = Path(f"apps/{fw_dir}/README.md")
     
     if not readme_path.exists():
+        real_world_app = (
+            f"{content_sections['real_world_app']}\n\n"
+            if content_sections['real_world_app'] else ""
+        )
         content = (
             f"{content_sections['header']}\n\n"
             f"{content_sections['about']}\n\n"
             f"{content_sections['status']}\n\n"
             f"{content_sections['usage']}\n\n"
-            f"{content_sections['real_world_app']}\n\n" if content_sections['real_world_app'] else ""
             "<!-- start_framework_specific -->\n\n"
             "<!-- Framework-specific notes go here -->\n\n"
             "<!-- end_framework_specific -->\n\n"
+            f"{real_world_app}"
             f"{content_sections['license']}"
         )
         try:

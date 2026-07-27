@@ -4,6 +4,7 @@
 import json
 import os
 import re
+import signal
 import subprocess
 import tempfile
 import time
@@ -244,6 +245,30 @@ class DevServerRunner(BenchmarkRunner):
         
         return 0.0, 0.0
     
+    def _terminate_process_group(self, process: subprocess.Popen, framework: str):
+        """Stop a dev server, including children spawned by the wrapping shell."""
+        try:
+            group_id = os.getpgid(process.pid)
+        except Exception:
+            group_id = None
+
+        try:
+            if group_id is not None:
+                os.killpg(group_id, signal.SIGTERM)
+            else:
+                process.terminate()
+            process.wait(timeout=5)
+            console.print(f"[dim]🛑 {framework}: Dev server stopped[/dim]")
+        except Exception:
+            try:
+                if group_id is not None:
+                    os.killpg(group_id, signal.SIGKILL)
+                else:
+                    process.kill()
+                process.wait(timeout=2)
+            except Exception:
+                pass
+
     def run_single_benchmark(self, framework: str) -> BenchmarkResult:
         """Measure dev server startup and HMR speed for a single framework."""
         try:
@@ -329,7 +354,10 @@ class DevServerRunner(BenchmarkRunner):
                 cwd=framework_dir,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
-                text=True
+                text=True,
+                # Own process group, so cleanup can reach the dev server itself
+                # and not just the shell wrapping it
+                start_new_session=True
             )
             
             try:
@@ -356,17 +384,8 @@ class DevServerRunner(BenchmarkRunner):
                 })
                 
             finally:
-                # Always cleanup the dev server
-                try:
-                    process.terminate()
-                    process.wait(timeout=5)
-                    console.print(f"[dim]🛑 {framework}: Dev server stopped[/dim]")
-                except Exception:
-                    try:
-                        process.kill()
-                        process.wait(timeout=2)
-                    except Exception:
-                        pass
+                # Always cleanup the dev server (and any child it spawned)
+                self._terminate_process_group(process, framework)
                 
         except subprocess.TimeoutExpired:
             return self._create_error_result(framework, "Dev server startup timed out")
