@@ -27,7 +27,9 @@ import { ForecastItemComponent } from './forecast-item.component';
 })
 export class ForecastComponent {
   private readonly injector = inject(Injector);
-  private readonly forecastItems = viewChildren<ElementRef<HTMLElement>>('forecastItem');
+  private readonly forecastItems = viewChildren<unknown, ElementRef<HTMLElement>>('forecastItem', {
+    read: ElementRef
+  });
 
   readonly weatherData = input.required<WeatherData>();
   readonly activeForecastIndex = signal<number | null>(null);
