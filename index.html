@@ -142,6 +142,9 @@
                         <a href="/astro/" class="dropdown-item" role="menuitem">
                             Astro
                         </a>
+                        <a href="/geajs/" class="dropdown-item" role="menuitem">
+                            Gea
+                        </a>
                         <a href="/vanilla/" class="dropdown-item" role="menuitem">
                             Vanilla JS
                         </a>
@@ -369,6 +372,20 @@
             <div class="framework-fallback" style="display: none;">A</div>
         </a>
         <a
+            href="/geajs/"
+            class="framework-card"
+            style="--fw-color: #00e5ff;"
+            data-framework="geajs"
+            title="Gea"
+        >
+            <img class="framework-icon" 
+                 width="32" 
+                 src="https://geajs.com/logo.png"
+                 alt="🌍"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <div class="framework-fallback" style="display: none;">G</div>
+        </a>
+        <a
             href="/vanilla/"
             class="framework-card"
             style="--fw-color: #F7DF1E;"
@@ -515,6 +532,15 @@
                        checked>
                 <span class="checkbox-indicator"></span>
                 <span class="framework-label">Astro</span>
+            </label>
+            <label class="framework-checkbox" style="--fw-color: #00e5ff;">
+                <input type="checkbox" 
+                       class="framework-toggle" 
+                       id="toggle-geajs" 
+                       data-framework="geajs"
+                       checked>
+                <span class="checkbox-indicator"></span>
+                <span class="framework-label">Gea</span>
             </label>
             <label class="framework-checkbox" style="--fw-color: #F7DF1E;">
                 <input type="checkbox" 
@@ -763,6 +789,15 @@
             <div class="framework-fallback" style="display: none;">A</div>
             <div class="framework-name">Astro</div>
         </a>
+        <a href="/geajs/" class="framework-card" style="--fw-color: #00e5ff;" data-framework="geajs">
+            <img class="framework-icon" 
+                 width="64" 
+                 src="https://geajs.com/logo.png"
+                 alt="🌍"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <div class="framework-fallback" style="display: none;">G</div>
+            <div class="framework-name">Gea</div>
+        </a>
         <a href="/vanilla/" class="framework-card" style="--fw-color: #F7DF1E;" data-framework="vanilla">
             <img class="framework-icon" 
                  width="64" 
@@ -830,6 +865,10 @@
         <li style="--fw-color: #BC52EE;">
             <h4>Astro</h4>
             <code>http://localhost:3000/astro/app?mock=true</code>
+        </li>
+        <li style="--fw-color: #00e5ff;">
+            <h4>Gea</h4>
+            <code>http://localhost:3000/geajs/app?mock=true</code>
         </li>
         <li style="--fw-color: #F7DF1E;">
             <h4>Vanilla JS</h4>
