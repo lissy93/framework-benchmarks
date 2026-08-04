@@ -35,12 +35,10 @@ import { WeatherContentComponent } from './components/weather-content.component'
             [message]="$any(weatherState.weather.error())?.message"
           ></app-error-state>
 
-          @defer (on immediate) {
-            @if (weatherState.weather.hasValue() && !weatherState.weather.isLoading() && !weatherState.weather.error()) {
-              <app-weather-content
-                [weatherData]="weatherState.weather.value()!"
-              ></app-weather-content>
-            }
+          @if (weatherState.weather.hasValue() && !weatherState.weather.isLoading() && !weatherState.weather.error()) {
+            <app-weather-content
+              [weatherData]="weatherState.weather.value()!"
+            ></app-weather-content>
           }
         </div>
       </div>
