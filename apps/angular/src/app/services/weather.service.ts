@@ -1,6 +1,4 @@
 import { Service } from '@angular/core';
-import { Observable, throwError, of, from } from 'rxjs';
-import { catchError, map, switchMap, delay } from 'rxjs/operators';
 import type { WeatherData, GeocodingResult } from '../types/weather.types';
 
 @Service()
@@ -23,25 +21,36 @@ export class WeatherService {
     return window.location.search.includes('mock=true') || isTestEnvironment;
   }
 
-  private fetchJson<T>(url: string): Observable<T> {
-    return from(
-      fetch(url).then(res => {
-        if (!res.ok) {
-          throw new Error(`HTTP ${res.status}`);
-        }
-        return res.json() as Promise<T>;
-      })
-    );
+  private async fetchJson<T>(url: string, abortSignal?: AbortSignal): Promise<T> {
+    const res = await fetch(url, { signal: abortSignal });
+
+    if (!res.ok) {
+      throw new Error(`HTTP ${res.status}`);
+    }
+
+    return await res.json() as T;
   }
 
-  private getMockData(): Observable<WeatherData> {
-    return this.fetchJson<WeatherData>('/mocks/weather-data.json').pipe(
-      delay(this.isTestEnvironment() ? 200 : 0),
-      catchError(error => {
-        console.error('Error loading mock data:', error);
-        return throwError(() => new Error('Failed to load mock data'));
-      })
-    );
+  private wait(ms: number): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  private async getMockData(abortSignal?: AbortSignal): Promise<WeatherData> {
+    let data: WeatherData;
+
+    try {
+      data = await this.fetchJson<WeatherData>('/mocks/weather-data.json', abortSignal);
+    } catch (error) {
+      console.error('Error loading mock data:', error);
+      throw new Error('Failed to load mock data');
+    }
+
+    // Add a small delay in test environments to make loading state visible
+    if (this.isTestEnvironment()) {
+      await this.wait(200);
+    }
+
+    return data;
   }
 
   private isTestEnvironment(): boolean {
@@ -93,68 +102,68 @@ export class WeatherService {
     return mockCities[cityName] || mockCities['London'];
   }
 
-  private geocodeLocation(cityName: string): Observable<GeocodingResult> {
+  private async geocodeLocation(cityName: string, abortSignal?: AbortSignal): Promise<GeocodingResult> {
     if (this.useMockData) {
-      return of(this.getMockGeocodingData(cityName));
+      return this.getMockGeocodingData(cityName);
     }
 
-    const params = new URLSearchParams({
-      name: cityName,
-      count: '1',
-      language: 'en',
-      format: 'json'
-    });
+    try {
+      const params = new URLSearchParams({
+        name: cityName,
+        count: '1',
+        language: 'en',
+        format: 'json'
+      });
 
-    return this.fetchJson<{ results: GeocodingResult[] }>(
-      `${this.geocodingUrl}/search?${params}`
-    ).pipe(
-      map(response => {
-        if (!response.results || response.results.length === 0) {
-          throw new Error('Location not found');
-        }
-        return response.results[0];
-      }),
-      catchError(error => {
-        console.error('Geocoding error:', error);
-        return throwError(() => new Error('Unable to find location. Please check the city name and try again.'));
-      })
-    );
+      const response = await this.fetchJson<{ results: GeocodingResult[] }>(
+        `${this.geocodingUrl}/search?${params}`,
+        abortSignal
+      );
+
+      if (!response.results || response.results.length === 0) {
+        throw new Error('Location not found');
+      }
+
+      return response.results[0];
+    } catch (error) {
+      console.error('Geocoding error:', error);
+      throw new Error('Unable to find location. Please check the city name and try again.');
+    }
   }
 
-  private getWeatherData(latitude: number, longitude: number): Observable<WeatherData> {
+  private async getWeatherData(
+    latitude: number,
+    longitude: number,
+    abortSignal?: AbortSignal
+  ): Promise<WeatherData> {
     if (this.useMockData) {
-      return this.getMockData();
+      return this.getMockData(abortSignal);
     }
 
-    const params = new URLSearchParams({
-      latitude: latitude.toString(),
-      longitude: longitude.toString(),
-      daily: 'temperature_2m_max,temperature_2m_min,weather_code,sunrise,sunset,rain_sum,uv_index_max,precipitation_probability_max',
-      current: 'temperature_2m,relative_humidity_2m,apparent_temperature,is_day,snowfall,showers,rain,precipitation,weather_code,cloud_cover,pressure_msl,surface_pressure,wind_direction_10m,wind_gusts_10m,wind_speed_10m',
-      timezone: 'GMT'
-    });
+    try {
+      const params = new URLSearchParams({
+        latitude: latitude.toString(),
+        longitude: longitude.toString(),
+        daily: 'temperature_2m_max,temperature_2m_min,weather_code,sunrise,sunset,rain_sum,uv_index_max,precipitation_probability_max',
+        current: 'temperature_2m,relative_humidity_2m,apparent_temperature,is_day,snowfall,showers,rain,precipitation,weather_code,cloud_cover,pressure_msl,surface_pressure,wind_direction_10m,wind_gusts_10m,wind_speed_10m',
+        timezone: 'GMT'
+      });
 
-    return this.fetchJson<WeatherData>(
-      `${this.baseUrl}/forecast?${params}`
-    ).pipe(
-      catchError(error => {
-        console.error('Weather API error:', error);
-        return throwError(() => new Error('Unable to fetch weather data. Please try again later.'));
-      })
-    );
+      return await this.fetchJson<WeatherData>(`${this.baseUrl}/forecast?${params}`, abortSignal);
+    } catch (error) {
+      console.error('Weather API error:', error);
+      throw new Error('Unable to fetch weather data. Please try again later.');
+    }
   }
 
-  getWeatherByCity(cityName: string): Observable<WeatherData> {
-    return this.geocodeLocation(cityName).pipe(
-      switchMap(location =>
-        this.getWeatherData(location.latitude, location.longitude).pipe(
-          map(weather => ({
-            ...weather,
-            locationName: location.name,
-            country: location.country
-          }))
-        )
-      )
-    );
+  async getWeatherByCity(cityName: string, abortSignal?: AbortSignal): Promise<WeatherData> {
+    const location = await this.geocodeLocation(cityName, abortSignal);
+    const weather = await this.getWeatherData(location.latitude, location.longitude, abortSignal);
+
+    return {
+      ...weather,
+      locationName: location.name,
+      country: location.country
+    };
   }
 }
