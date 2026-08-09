@@ -11,7 +11,7 @@ export class WeatherStateService {
 
   readonly weather = resource<WeatherData, { city: string }>({
     params: () => ({ city: this.city() }),
-    loader: async ({ params, abortSignal }) => {
+    loader: async({ params, abortSignal }) => {
       // Add a small delay in test environments to make loading state visible
       if (this.isTestEnvironment()) {
         await this.wait(200);

@@ -52,6 +52,7 @@ export default [
         
         // Additional Node.js/Browser globals
         URL: 'readonly',
+        AbortSignal: 'readonly',
         MutationObserver: 'readonly',
         ResizeObserver: 'readonly',
         IntersectionObserver: 'readonly',
@@ -138,6 +139,7 @@ export default [
         
         // Additional globals
         URL: 'readonly',
+        AbortSignal: 'readonly',
         MutationObserver: 'readonly',
         ResizeObserver: 'readonly',
         IntersectionObserver: 'readonly',
