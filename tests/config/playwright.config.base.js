@@ -58,6 +58,13 @@ function createConfig(framework) {
         url: 'http://localhost:3000/',
       }
     },
+    'vue-vapor': {
+      baseURL: 'http://localhost:3000/?mock=true',
+      webServer: {
+        command: 'npm run dev:vue-vapor',
+        url: 'http://localhost:3000/',
+      }
+    },
     jquery: {
       baseURL: 'http://localhost:3000/?mock=true',
       webServer: {
