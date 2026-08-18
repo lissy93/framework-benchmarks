@@ -210,37 +210,37 @@ docker<span class="w"> </span>run<span class="w"> </span>-p<span class="w"> </sp
 docker<span class="w"> </span>ps
 
 <span class="c1"># Run all benchmarks with default settings</span>
-docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>&lt;container-id&gt;<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span>
+docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>&lt;container-id&gt;<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">"</span>
 <span class="s2">    cd /app &amp;&amp; \</span>
-<span class="s2">    CHROME_FLAGS=&#39;--no-sandbox --disable-dev-shm-usage --headless&#39; \</span>
+<span class="s2">    CHROME_FLAGS='--no-sandbox --disable-dev-shm-usage --headless' \</span>
 <span class="s2">    python scripts/benchmark/main.py all</span>
-<span class="s2">&quot;</span>
+<span class="s2">"</span>
 </code></pre></div>
 
 <h3>Custom Benchmark Options</h3>
 <div class="codehilite"><pre><span></span><code><span class="c1"># Run specific benchmark types</span>
-docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>&lt;container-id&gt;<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span>
+docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>&lt;container-id&gt;<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">"</span>
 <span class="s2">    cd /app &amp;&amp; \</span>
-<span class="s2">    CHROME_FLAGS=&#39;--no-sandbox --disable-dev-shm-usage --headless&#39; \</span>
+<span class="s2">    CHROME_FLAGS='--no-sandbox --disable-dev-shm-usage --headless' \</span>
 <span class="s2">    python scripts/benchmark/main.py all --type lighthouse,bundle-size --executions 3</span>
-<span class="s2">&quot;</span>
+<span class="s2">"</span>
 
 <span class="c1"># Run benchmarks for specific frameworks only</span>
-docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>&lt;container-id&gt;<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span>
+docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>&lt;container-id&gt;<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">"</span>
 <span class="s2">    cd /app &amp;&amp; \</span>
-<span class="s2">    CHROME_FLAGS=&#39;--no-sandbox --disable-dev-shm-usage --headless&#39; \</span>
+<span class="s2">    CHROME_FLAGS='--no-sandbox --disable-dev-shm-usage --headless' \</span>
 <span class="s2">    python scripts/benchmark/main.py all --frameworks react,vue,svelte --executions 5</span>
-<span class="s2">&quot;</span>
+<span class="s2">"</span>
 
 <span class="c1"># Run with multiple benchmark types and frameworks</span>
-docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>&lt;container-id&gt;<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span>
+docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>&lt;container-id&gt;<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">"</span>
 <span class="s2">    cd /app &amp;&amp; \</span>
-<span class="s2">    CHROME_FLAGS=&#39;--no-sandbox --disable-dev-shm-usage --headless&#39; \</span>
+<span class="s2">    CHROME_FLAGS='--no-sandbox --disable-dev-shm-usage --headless' \</span>
 <span class="s2">    python scripts/benchmark/main.py all \</span>
 <span class="s2">      --type lighthouse,bundle-size,source-analysis,build-time \</span>
 <span class="s2">      --frameworks react,vue,angular,svelte \</span>
 <span class="s2">      --executions 3</span>
-<span class="s2">&quot;</span>
+<span class="s2">"</span>
 </code></pre></div>
 
 <h3>Development Container Benchmarks</h3>
@@ -248,11 +248,11 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 docker<span class="w"> </span>compose<span class="w"> </span>--profile<span class="w"> </span>dev<span class="w"> </span>up<span class="w"> </span>framework-benchmarks-dev
 
 <span class="c1"># Then run benchmarks (development container has additional tools)</span>
-docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>framework-benchmarks-framework-benchmarks-dev-1<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span>
+docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>framework-benchmarks-framework-benchmarks-dev-1<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">"</span>
 <span class="s2">    cd /app &amp;&amp; \</span>
-<span class="s2">    CHROME_FLAGS=&#39;--no-sandbox --disable-dev-shm-usage --headless&#39; \</span>
+<span class="s2">    CHROME_FLAGS='--no-sandbox --disable-dev-shm-usage --headless' \</span>
 <span class="s2">    python scripts/benchmark/main.py all --type lighthouse,bundle-size --executions 3</span>
-<span class="s2">&quot;</span>
+<span class="s2">"</span>
 </code></pre></div>
 
 <h2>🎯 Available Endpoints</h2>
@@ -317,8 +317,8 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 </table>
 <p>Example with environment variables:</p>
 <div class="codehilite"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-p<span class="w"> </span><span class="m">3000</span>:3000<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-e<span class="w"> </span><span class="nv">BENCHMARK_TYPES</span><span class="o">=</span><span class="s2">&quot;lighthouse,bundle-size&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-e<span class="w"> </span><span class="nv">FRAMEWORKS</span><span class="o">=</span><span class="s2">&quot;react,vue,svelte&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">BENCHMARK_TYPES</span><span class="o">=</span><span class="s2">"lighthouse,bundle-size"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">FRAMEWORKS</span><span class="o">=</span><span class="s2">"react,vue,svelte"</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-e<span class="w"> </span><span class="nv">EXECUTIONS</span><span class="o">=</span><span class="m">3</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>ghcr.io/lissy93/framework-benchmarks:latest
 </code></pre></div>
@@ -330,9 +330,9 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>&lt;container-id&gt;<span class="w"> </span>google-chrome<span class="w"> </span>--version
 
 <span class="c1"># Test Chrome with proper flags</span>
-docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>&lt;container-id&gt;<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span>
+docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>&lt;container-id&gt;<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">"</span>
 <span class="s2">    google-chrome --no-sandbox --disable-dev-shm-usage --headless --dump-dom http://localhost:3000</span>
-<span class="s2">&quot;</span>
+<span class="s2">"</span>
 </code></pre></div>
 
 <h3>Memory Issues</h3>
@@ -384,18 +384,18 @@ docker<span class="w"> </span>run<span class="w"> </span>-p<span class="w"> </sp
 <div class="codehilite"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-p<span class="w"> </span><span class="m">3000</span>:3000<span class="w"> </span>-v<span class="w"> </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/results:/app/benchmark-results<span class="w"> </span>ghcr.io/lissy93/framework-benchmarks:latest
 
 <span class="c1"># In another terminal - run benchmarks with results saved to host</span>
-docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span><span class="k">$(</span>docker<span class="w"> </span>ps<span class="w"> </span>-q<span class="w"> </span>--filter<span class="w"> </span><span class="nv">ancestor</span><span class="o">=</span>ghcr.io/lissy93/framework-benchmarks:latest<span class="k">)</span><span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span>
+docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span><span class="k">$(</span>docker<span class="w"> </span>ps<span class="w"> </span>-q<span class="w"> </span>--filter<span class="w"> </span><span class="nv">ancestor</span><span class="o">=</span>ghcr.io/lissy93/framework-benchmarks:latest<span class="k">)</span><span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">"</span>
 <span class="s2">    cd /app &amp;&amp; \</span>
-<span class="s2">    CHROME_FLAGS=&#39;--no-sandbox --disable-dev-shm-usage --headless&#39; \</span>
+<span class="s2">    CHROME_FLAGS='--no-sandbox --disable-dev-shm-usage --headless' \</span>
 <span class="s2">    python scripts/benchmark/main.py all --type lighthouse,bundle-size --executions 3</span>
-<span class="s2">&quot;</span>
+<span class="s2">"</span>
 
 <span class="c1"># Results will be saved to ./results/ on your host</span>
 </code></pre></div>
 
 <h3>Performance Testing Specific Frameworks</h3>
 <div class="codehilite"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-p<span class="w"> </span><span class="m">3000</span>:3000<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-e<span class="w"> </span><span class="nv">FRAMEWORKS</span><span class="o">=</span><span class="s2">&quot;react,vue,svelte&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">FRAMEWORKS</span><span class="o">=</span><span class="s2">"react,vue,svelte"</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-e<span class="w"> </span><span class="nv">EXECUTIONS</span><span class="o">=</span><span class="m">5</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-v<span class="w"> </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/results:/app/benchmark-results<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>ghcr.io/lissy93/framework-benchmarks:latest

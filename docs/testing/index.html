@@ -283,14 +283,14 @@ npm<span class="w"> </span>run<span class="w"> </span>test:ui<span class="w">   
 </ul>
 <h2>🛠 Writing New Tests</h2>
 <h3>Unit Test Example</h3>
-<div class="codehilite"><pre><span></span><code><span class="nx">runner</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="s1">&#39;should validate input correctly&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<div class="codehilite"><pre><span></span><code><span class="nx">runner</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="s1">'should validate input correctly'</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">createWeatherService</span><span class="p">();</span>
 
 <span class="w">  </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">service</span><span class="p">.</span><span class="nx">getWeatherByCity</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
-<span class="w">    </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s1">&#39;Should have thrown an error&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">service</span><span class="p">.</span><span class="nx">getWeatherByCity</span><span class="p">(</span><span class="s1">''</span><span class="p">);</span>
+<span class="w">    </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s1">'Should have thrown an error'</span><span class="p">);</span>
 <span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s1">&#39;required&#39;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s1">'required'</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
 <span class="w">      </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="sb">`Unexpected error: </span><span class="si">${</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">  </span><span class="p">}</span>
@@ -298,13 +298,13 @@ npm<span class="w"> </span>run<span class="w"> </span>test:ui<span class="w">   
 </code></pre></div>
 
 <h3>E2E Test Example</h3>
-<div class="codehilite"><pre><span></span><code><span class="nx">test</span><span class="p">(</span><span class="s1">&#39;should search for weather data&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">({</span><span class="w"> </span><span class="nx">page</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<div class="codehilite"><pre><span></span><code><span class="nx">test</span><span class="p">(</span><span class="s1">'should search for weather data'</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">({</span><span class="w"> </span><span class="nx">page</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">helpers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">WeatherAppHelpers</span><span class="p">(</span><span class="nx">page</span><span class="p">);</span>
 
 <span class="w">  </span><span class="k">await</span><span class="w"> </span><span class="nx">helpers</span><span class="p">.</span><span class="nx">navigateToApp</span><span class="p">();</span>
-<span class="w">  </span><span class="k">await</span><span class="w"> </span><span class="nx">helpers</span><span class="p">.</span><span class="nx">searchForCity</span><span class="p">(</span><span class="s1">&#39;London&#39;</span><span class="p">);</span>
+<span class="w">  </span><span class="k">await</span><span class="w"> </span><span class="nx">helpers</span><span class="p">.</span><span class="nx">searchForCity</span><span class="p">(</span><span class="s1">'London'</span><span class="p">);</span>
 <span class="w">  </span><span class="k">await</span><span class="w"> </span><span class="nx">helpers</span><span class="p">.</span><span class="nx">waitForWeatherData</span><span class="p">();</span>
-<span class="w">  </span><span class="k">await</span><span class="w"> </span><span class="nx">helpers</span><span class="p">.</span><span class="nx">assertLocationDisplayed</span><span class="p">(</span><span class="s1">&#39;London&#39;</span><span class="p">);</span>
+<span class="w">  </span><span class="k">await</span><span class="w"> </span><span class="nx">helpers</span><span class="p">.</span><span class="nx">assertLocationDisplayed</span><span class="p">(</span><span class="s1">'London'</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre></div>
 
