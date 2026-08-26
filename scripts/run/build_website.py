@@ -316,6 +316,7 @@ def copy_framework_apps(frameworks: List[Dict], root_dir: Path, config: Dict, ou
     for framework_data in frameworks:
         framework_id = framework_data.get("id")
         build_config = framework_data.get("build", {})
+        build_command = build_config.get("buildCommand", "")
         build_dir = build_config.get("dir", "dist")
         
         # Handle special cases for build directories
@@ -323,7 +324,7 @@ def copy_framework_apps(frameworks: List[Dict], root_dir: Path, config: Dict, ou
             build_dir = "build"
         elif framework_id == "angular":
             build_dir = "dist/weather-app-angular"
-        elif framework_id in ["vanilla", "alpine", "lume-js"]:
+        elif not build_command or "echo" in build_command:
             dist_path = root_dir / app_dir / framework_id / "dist"
             build_dir = "dist" if dist_path.exists() and (dist_path / "index.html").exists() else None
         
