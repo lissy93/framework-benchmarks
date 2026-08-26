@@ -1,0 +1,36 @@
+/* Lume.js specific styles */
+
+/* Ensure hidden attribute hides elements regardless of other CSS */
+[hidden] { display: none !important; }
+
+/* Loading state display when visible */
+.loading:not([hidden]) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+
+/* Error state when visible */
+.error:not([hidden]) {
+  display: block;
+  text-align: center;
+  padding: 2rem;
+}
+
+/* Weather content when visible */
+.weather-content:not([hidden]) {
+  display: block;
+}
+
+/* Forecast details expand/collapse */
+.forecast-item__details {
+  overflow: hidden;
+}
+
+/* Active forecast item */
+.forecast-item.active {
+  background-color: var(--color-background-secondary);
+  border-radius: var(--border-radius-md);
+}
