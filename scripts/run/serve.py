@@ -31,7 +31,6 @@ SPECIAL_BUILD_DIRS = {
     "svelte": "build",
     "angular": "dist/weather-app-angular",
 }
-NO_BUILD_FRAMEWORKS = {"vanilla", "alpine"}
 
 
 @dataclass
@@ -96,7 +95,8 @@ class FrameworkServer:
     
     def _get_build_dir(self, framework_id: str, build_config: dict) -> Optional[str]:
         """Get the build directory for a framework."""
-        if framework_id in NO_BUILD_FRAMEWORKS:
+        command = build_config.get("buildCommand", "")
+        if not command or "echo" in command:
             return None
         return SPECIAL_BUILD_DIRS.get(framework_id, build_config.get("dir", "dist"))
     
