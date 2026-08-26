@@ -106,6 +106,9 @@
                         <a href="/react/" class="dropdown-item" role="menuitem">
                             React
                         </a>
+                        <a href="/octane/" class="dropdown-item" role="menuitem">
+                            Octane
+                        </a>
                         <a href="/angular/" class="dropdown-item" role="menuitem">
                             Angular
                         </a>
@@ -202,6 +205,20 @@
                  alt="⚛️"
                  onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
             <div class="framework-fallback" style="display: none;">R</div>
+        </a>
+        <a
+            href="/octane/"
+            class="framework-card"
+            style="--fw-color: #FF415A;"
+            data-framework="octane"
+            title="Octane"
+        >
+            <img class="framework-icon" 
+                 width="32" 
+                 src="https://raw.githubusercontent.com/octanejs/octane/main/icon.svg"
+                 alt="🏎️"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <div class="framework-fallback" style="display: none;">O</div>
         </a>
         <a
             href="/angular/"
@@ -424,6 +441,15 @@
                        checked>
                 <span class="checkbox-indicator"></span>
                 <span class="framework-label">React</span>
+            </label>
+            <label class="framework-checkbox" style="--fw-color: #FF415A;">
+                <input type="checkbox" 
+                       class="framework-toggle" 
+                       id="toggle-octane" 
+                       data-framework="octane"
+                       checked>
+                <span class="checkbox-indicator"></span>
+                <span class="framework-label">Octane</span>
             </label>
             <label class="framework-checkbox" style="--fw-color: #DD0031;">
                 <input type="checkbox" 
@@ -681,6 +707,15 @@
             <div class="framework-fallback" style="display: none;">R</div>
             <div class="framework-name">React</div>
         </a>
+        <a href="/octane/" class="framework-card" style="--fw-color: #FF415A;" data-framework="octane">
+            <img class="framework-icon" 
+                 width="64" 
+                 src="https://raw.githubusercontent.com/octanejs/octane/main/icon.svg"
+                 alt="🏎️"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <div class="framework-fallback" style="display: none;">O</div>
+            <div class="framework-name">Octane</div>
+        </a>
         <a href="/angular/" class="framework-card" style="--fw-color: #DD0031;" data-framework="angular">
             <img class="framework-icon" 
                  width="64" 
@@ -817,6 +852,10 @@
         <li style="--fw-color: #61DAFB;">
             <h4>React</h4>
             <code>http://localhost:3000/react/app?mock=true</code>
+        </li>
+        <li style="--fw-color: #FF415A;">
+            <h4>Octane</h4>
+            <code>http://localhost:3000/octane/app?mock=true</code>
         </li>
         <li style="--fw-color: #DD0031;">
             <h4>Angular</h4>

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-26T16:42:31Z",
+  "generated_at": "2026-08-26T20:07:58Z",
   "items": [
     {
       "id": "react",
@@ -7,6 +7,13 @@
       "implementation": "#### Custom Hooks\nThe [`useWeatherData`](https://github.com/Lissy93/framework-benchmarks/blob/main/apps/react/src/hooks/useWeatherData.js) custom hook encapsulates all weather-related state and logic, demonstrating React's hooks pattern for reusable stateful logic.\n\n#### Error Boundary\nThe app includes an [`ErrorBoundary`](https://github.com/Lissy93/framework-benchmarks/blob/main/apps/react/src/components/ErrorBoundary.jsx) component using class-based lifecycle methods to catch JavaScript errors anywhere in the component tree.\n\n#### useCallback & useEffect Optimization\nExtensive use of `useCallback` for memoizing functions and `useEffect` with proper dependency arrays to prevent unnecessary re-renders and infinite loops.\n\n#### Conditional Rendering Patterns\nReact's conditional rendering using logical operators (`&&`) and ternary expressions for showing loading states, errors, and weather content based on application state.\n\n#### Functional Components\nAll components are functional components using hooks, showcasing modern React patterns over legacy class-based components.",
       "about": "React is the most popular frontend library, created by Facebook in 2013. \nIt popularised the component model and virtual DOM, changing frontend forever. \nIts ecosystem is massive, with libraries for everything. \nThe downside is that it’s just a view layer, so you end up wiring lots of pieces together. \nStill, it runs huge apps like Facebook, Instagram and Netflix.",
       "thoughts": "React is everywhere, powering millions of websites and used by every major tech company. It's been around for over 12 years, and both React and its tooling are incredibly mature. There's a reason it became the default choice for so many teams - the ecosystem is massive, jobs are plentiful, and you can build basically anything.\n\nBut it's not perfect. Our weather app showcases both React's strengths and frustrations. The component model is elegant, `useState` and `useEffect` work fine for simple state, and the custom `useWeatherData` hook abstracts the weather logic nicely. But you're constantly thinking about re-renders, dependency arrays, and manual memoization.\n\nThe virtual DOM adds overhead that other frameworks avoid entirely. Need to optimize performance? Time to sprinkle `React.memo`, `useCallback`, and `useMemo` everywhere. Coming from Svelte or Solid, all this manual work feels tedious. But the developer tooling is exceptional and the community support is unmatched.\n\nThe JSX syntax is familiar once you get used to the quirks - `className` instead of `class`, self-closing tags, and JavaScript expressions in curly braces. Controlled components with `value` and `onChange` work well for forms, though they're more verbose than Vue's `v-model`.\n\nReact really shines for complex applications where the ecosystem matters. We didn't need Redux, React Query, or code splitting for this simple weather app, but for something like [Web Check](https://github.com/lissy93/web-check), these tools become essential. The flexibility to choose your own architecture is both React's blessing and curse."
+    },
+    {
+      "id": "octane",
+      "name": "Octane",
+      "implementation": "<!-- Framework-specific notes go here -->",
+      "about": null,
+      "thoughts": null
     },
     {
       "id": "angular",
