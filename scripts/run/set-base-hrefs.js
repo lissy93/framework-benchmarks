@@ -247,10 +247,16 @@ const builders = {
   static: buildStaticForComparison
 };
 
-// Build all frameworks for comparison
-console.log('🚀 Building all frameworks for comparison website...\n');
+// Build every framework for comparison, or just the one named on the command line
+const [requestedId] = process.argv.slice(2);
+const frameworks = getFrameworks().filter(fw => !requestedId || fw.id === requestedId);
 
-const frameworks = getFrameworks();
+if (frameworks.length === 0) {
+  console.error(`❌ Framework '${requestedId}' not found in frameworks.json`);
+  process.exit(1);
+}
+
+console.log(`🚀 Building ${requestedId || 'all frameworks'} for comparison website...\n`);
 
 frameworks.forEach(framework => {
   if (!fs.existsSync(path.join(appsDir, framework.dir))) {
@@ -273,7 +279,9 @@ if (failed.length > 0) {
 }
 
 if (skipped.length > 0) {
-  console.log(`\n⚠️  Built ${frameworks.length - skipped.length}/${frameworks.length} frameworks, skipped: ${skipped.join(', ')}`);
+  console.log(`\n⚠️  Built ${frameworks.length - skipped.length}/${frameworks.length}, skipped: ${skipped.join(', ')}`);
+} else if (requestedId) {
+  console.log(`\n🎉 ${requestedId} built for comparison website!`);
 } else {
   console.log(`\n🎉 All ${frameworks.length} frameworks built for comparison website!`);
 }
