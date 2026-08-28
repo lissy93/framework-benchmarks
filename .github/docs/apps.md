@@ -7,6 +7,7 @@ This project contains the same weather application built using 16 different Java
 The project includes implementations for:
 
 **React** - Component-based with hooks and modern React patterns
+**Octane** - Compiled React-style components with direct DOM updates
 **Vue** - Built with Vue 3 and the Composition API
 **Vue Vapor** - Vue 3.6's opt-in compiler mode with direct DOM updates
 **Svelte** - Compiled framework with reactive statements

@@ -63,10 +63,16 @@ def build_all(parallel: bool, framework: str, ci: bool, skip_website: bool, stat
         try:
             comparison_script = Path(__file__).parent / "set-base-hrefs.js"
             if comparison_script.exists():
-                result = subprocess.run(["node", str(comparison_script)])
+                # Pass the framework through, so a single app can be built on its own
+                command = ["node", str(comparison_script)]
+                if framework:
+                    command.append(framework)
+                result = subprocess.run(command)
                 if result.returncode == 0:
-                    console.print("[green]✓ All frameworks built for comparison[/green]")
-                    if not skip_website:
+                    built = framework if framework else "All frameworks"
+                    console.print(f"[green]✓ {built} built for comparison[/green]")
+                    # Only build the website once every framework is there
+                    if not skip_website and not framework:
                         console.print(f"\n[bold]Building website...[/bold]")
                         build_website_script = Path(__file__).parent / "build_website.py"
                         if build_website_script.exists():

@@ -9,6 +9,13 @@ function createConfig(framework) {
         url: 'http://localhost:3000/',
       }
     },
+    octane: {
+      baseURL: 'http://localhost:3000/?mock=true',
+      webServer: {
+        command: 'npm run dev:octane',
+        url: 'http://localhost:3000/',
+      }
+    },
     react: {
       baseURL: 'http://localhost:3000/?mock=true',
       webServer: {
