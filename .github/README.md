@@ -174,15 +174,15 @@ and also view a stats on a per-framework basis.
 <p align="center"><sub>The following charts show live data from the latest benchmark run. See the web version for interactive charts.</sub></p>
 <!-- start_summary_charts -->
 <p align="center">
-  <img src="https://quickchart.io/chart/render/zf-9a79ace0-8da2-4e94-862d-b97f2556988c" width="256" title="Performance Overview" alt="Performance Overview" />
-  <img src="https://quickchart.io/chart/render/zf-71038b99-487c-482c-99d4-2dfe880348e4" width="256" title="Performance vs Bundle Size" alt="Performance vs Bundle Size" />
-  <img src="https://quickchart.io/chart/render/zf-b7cbe78c-e9a1-42db-8989-0451caaf3aae" width="256" title="Source Code Analysis" alt="Source Code Analysis" />
-  <img src="https://quickchart.io/chart/render/zf-bf10b80c-e099-44fc-8b85-67a2955f577a" width="256" title="Bundle Size and Comparison" alt="Bundle Size and Comparison" />
-  <img src="https://quickchart.io/chart/render/zf-73adadef-8559-4bab-9068-1582fd020af8" width="256" title="Lighthouse Performance Scores" alt="Lighthouse Performance Scores" />
-  <img src="https://quickchart.io/chart/render/zf-d738d010-069d-4a36-a09e-73a870f1b96b" width="256" title="Loading Performance" alt="Loading Performance" />
-  <img src="https://quickchart.io/chart/render/zf-5182739b-8086-4c64-9b5f-235b61337238" width="256" title="Project Size Distribution" alt="Project Size Distribution" />
-  <img src="https://quickchart.io/chart/render/zf-8b7ea333-c03b-4a31-a391-3f9f8a3b3634" width="256" title="Development Server Performance" alt="Development Server Performance" />
-  <img src="https://quickchart.io/chart/render/zf-db321930-30b9-440b-9805-97679a4da316" width="256" title="Build Time Distribution" alt="Build Time Distribution" />
+  <img src="https://quickchart.io/chart/render/zf-8f768172-61c0-4988-b42f-81529059f0d3" width="256" title="Performance Overview" alt="Performance Overview" />
+  <img src="https://quickchart.io/chart/render/zf-e032c5e5-6802-4572-9a09-dab022cfce5d" width="256" title="Performance vs Bundle Size" alt="Performance vs Bundle Size" />
+  <img src="https://quickchart.io/chart/render/zf-7a1566a7-594e-462d-873d-12bc414dedee" width="256" title="Source Code Analysis" alt="Source Code Analysis" />
+  <img src="https://quickchart.io/chart/render/zf-8cad2a1b-ac36-4a15-bc70-b13b6174c974" width="256" title="Bundle Size and Comparison" alt="Bundle Size and Comparison" />
+  <img src="https://quickchart.io/chart/render/zf-48706571-2124-4c6e-8971-beddcc13c283" width="256" title="Lighthouse Performance Scores" alt="Lighthouse Performance Scores" />
+  <img src="https://quickchart.io/chart/render/zf-8413f1eb-25da-4b8f-a69f-fa6baca8bc1b" width="256" title="Loading Performance" alt="Loading Performance" />
+  <img src="https://quickchart.io/chart/render/zf-bb70336b-345d-4138-9564-d0c3cb4cf580" width="256" title="Project Size Distribution" alt="Project Size Distribution" />
+  <img src="https://quickchart.io/chart/render/zf-a260baf1-2369-4751-b17d-ba1ad152bf8d" width="256" title="Development Server Performance" alt="Development Server Performance" />
+  <img src="https://quickchart.io/chart/render/zf-a415e161-89c4-4177-8673-73260a322811" width="256" title="Build Time Distribution" alt="Build Time Distribution" />
 </p>
 <!-- end_summary_charts -->
 
@@ -191,21 +191,21 @@ and also view a stats on a per-framework basis.
 <!-- start_framework_stats -->
 | Framework | Stars | Downloads | Size | Contributors | Age | Last updated | License |
 |---|---|---|---|---|---|---|---|
-| <a href="https://github.com/facebook/react"><img src="https://storage.googleapis.com/as93-screenshots/frontend-benchmarks/framework-logos/react.png" alt="⚛️" width="16"></a> [**React**](https://github.com/facebook/react) | 248k | 672.8M | 1048.4 MB | 2k | 13.2y | 19 hours ago | MIT |
-| <a href="https://github.com/octanejs/octane"><img src="https://raw.githubusercontent.com/octanejs/octane/main/icon.svg" alt="🏎️" width="16"></a> [**Octane**](https://github.com/octanejs/octane) | 1.3k | 47.1k | 110.5 MB | 24 | 0.2y | 6 hours ago | MIT |
-| <a href="https://github.com/angular/angular"><img src="https://storage.googleapis.com/as93-screenshots/frontend-benchmarks/framework-logos/angular.png" alt="🅰️" width="16"></a> [**Angular**](https://github.com/angular/angular) | 101k | 24.8M | 640.1 MB | 2.7k | 11.9y | 5 hours ago | MIT |
-| <a href="https://github.com/sveltejs/svelte"><img src="https://storage.googleapis.com/as93-screenshots/frontend-benchmarks/framework-logos/svelte.png" alt="🔥" width="16"></a> [**Svelte**](https://github.com/sveltejs/svelte) | 88k | 23.2M | 119.4 MB | 975 | 9.8y | 7 hours ago | MIT |
-| <a href="https://github.com/preactjs/preact"><img src="https://storage.googleapis.com/as93-screenshots/frontend-benchmarks/framework-logos/preact.png" alt="💜" width="16"></a> [**Preact**](https://github.com/preactjs/preact) | 38.8k | 125M | 19.5 MB | 379 | 11.0y | 2 days ago | MIT |
-| <a href="https://github.com/solidjs/solid"><img src="https://storage.googleapis.com/as93-screenshots/frontend-benchmarks/framework-logos/solid.png" alt="🚀" width="16"></a> [**Solid.js**](https://github.com/solidjs/solid) | 35.9k | 15.3M | 22.3 MB | 194 | 8.3y | 1 week ago | MIT |
-| <a href="https://github.com/QwikDev/qwik"><img src="https://storage.googleapis.com/as93-screenshots/frontend-benchmarks/framework-logos/qwik.png" alt="⚡" width="16"></a> [**Qwik**](https://github.com/QwikDev/qwik) | 22.1k | 243.2k | 91.0 MB | 667 | 5.5y | 13 hours ago | MIT |
-| <a href="https://github.com/vuejs/core"><img src="https://storage.googleapis.com/as93-screenshots/frontend-benchmarks/framework-logos/vue.png" alt="💚" width="16"></a> [**Vue 3**](https://github.com/vuejs/core) | 54.3k | 59.6M | 43.3 MB | 643 | 7.9y | 2 days ago | MIT |
-| <a href="https://github.com/jquery/jquery"><img src="https://storage.googleapis.com/as93-screenshots/frontend-benchmarks/framework-logos/jquery.png" alt="💙" width="16"></a> [**jQuery**](https://github.com/jquery/jquery) | 59.8k | 72.7M | 35.1 MB | 349 | 20.4y | 1 week ago | MIT |
-| <a href="https://github.com/alpinejs/alpine"><img src="https://storage.googleapis.com/as93-screenshots/frontend-benchmarks/framework-logos/alpine.png" alt="🏔️" width="16"></a> [**Alpine.js**](https://github.com/alpinejs/alpine) | 31.9k | 2.7M | 8.9 MB | 322 | 6.8y | 3 days ago | MIT |
-| <a href="https://github.com/lit/lit"><img src="https://storage.googleapis.com/as93-screenshots/frontend-benchmarks/framework-logos/lit.png" alt="🔥" width="16"></a> [**Lit**](https://github.com/lit/lit) | 21.8k | 29.7M | 60.8 MB | 210 | 9.2y | 2 months ago | BSD-3-Clause |
-| <a href="https://github.com/vanjs-org/van"><img src="https://storage.googleapis.com/as93-screenshots/frontend-benchmarks/framework-logos/vanjs.png" alt="🚐" width="16"></a> [**VanJS**](https://github.com/vanjs-org/van) | 4.4k | 9.5k | 3.9 MB | 24 | 3.3y | 1 month ago | MIT |
-| <a href="https://github.com/sathvikc/lume-js"><img src="https://raw.githubusercontent.com/sathvikc/lume-js/refs/heads/main/lume-logo.png" alt="💡" width="16"></a> [**Lume.js**](https://github.com/sathvikc/lume-js) | 44 | 200 | 1.7 MB | 1 | 0.9y | 1 month ago | MIT |
-| <a href="https://github.com/withastro/astro"><img src="https://astro.build/assets/press/astro-logo-light-gradient.svg" alt="🚀" width="16"></a> [**Astro**](https://github.com/withastro/astro) | 62.1k | 19.3M | 228.2 MB | 1.2k | 5.5y | 12 hours ago | Unknown |
-| <a href="https://github.com/dashersw/gea"><img src="https://geajs.com/logo.png" alt="🌍" width="16"></a> [**Gea.js**](https://github.com/dashersw/gea) | 1.2k | 1.6k | 15.0 MB | 8 | 0.5y | 1 week ago | MIT |
+| <a href="https://github.com/facebook/react"><img src="https://storage.googleapis.com/as93-screenshots/frontend-benchmarks/framework-logos/react.png" alt="⚛️" width="16"></a> [**React**](https://github.com/facebook/react) | 248.3k | 671.1M | 1048.4 MB | 2k | 13.3y | 1 day ago | MIT |
+| <a href="https://github.com/octanejs/octane"><img src="https://raw.githubusercontent.com/octanejs/octane/main/icon.svg" alt="🏎️" width="16"></a> [**Octane**](https://github.com/octanejs/octane) | 1.3k | 48.3k | 110.8 MB | 24 | 0.2y | 15 hours ago | MIT |
+| <a href="https://github.com/angular/angular"><img src="https://storage.googleapis.com/as93-screenshots/frontend-benchmarks/framework-logos/angular.png" alt="🅰️" width="16"></a> [**Angular**](https://github.com/angular/angular) | 101k | 23.9M | 640.1 MB | 2.7k | 11.9y | 1 day ago | MIT |
+| <a href="https://github.com/sveltejs/svelte"><img src="https://storage.googleapis.com/as93-screenshots/frontend-benchmarks/framework-logos/svelte.png" alt="🔥" width="16"></a> [**Svelte**](https://github.com/sveltejs/svelte) | 88k | 22.8M | 119.4 MB | 975 | 9.8y | 1 day ago | MIT |
+| <a href="https://github.com/preactjs/preact"><img src="https://storage.googleapis.com/as93-screenshots/frontend-benchmarks/framework-logos/preact.png" alt="💜" width="16"></a> [**Preact**](https://github.com/preactjs/preact) | 38.8k | 123M | 19.5 MB | 379 | 11.0y | 3 days ago | MIT |
+| <a href="https://github.com/solidjs/solid"><img src="https://storage.googleapis.com/as93-screenshots/frontend-benchmarks/framework-logos/solid.png" alt="🚀" width="16"></a> [**Solid.js**](https://github.com/solidjs/solid) | 35.9k | 15.1M | 23.3 MB | 194 | 8.3y | 1 week ago | MIT |
+| <a href="https://github.com/QwikDev/qwik"><img src="https://storage.googleapis.com/as93-screenshots/frontend-benchmarks/framework-logos/qwik.png" alt="⚡" width="16"></a> [**Qwik**](https://github.com/QwikDev/qwik) | 22.1k | 242.6k | 91.0 MB | 668 | 5.5y | 9 hours ago | MIT |
+| <a href="https://github.com/vuejs/core"><img src="https://storage.googleapis.com/as93-screenshots/frontend-benchmarks/framework-logos/vue.png" alt="💚" width="16"></a> [**Vue 3**](https://github.com/vuejs/core) | 54.3k | 58.1M | 43.3 MB | 643 | 7.9y | 3 days ago | MIT |
+| <a href="https://github.com/jquery/jquery"><img src="https://storage.googleapis.com/as93-screenshots/frontend-benchmarks/framework-logos/jquery.png" alt="💙" width="16"></a> [**jQuery**](https://github.com/jquery/jquery) | 59.8k | 72.3M | 35.1 MB | 349 | 20.4y | 1 week ago | MIT |
+| <a href="https://github.com/alpinejs/alpine"><img src="https://storage.googleapis.com/as93-screenshots/frontend-benchmarks/framework-logos/alpine.png" alt="🏔️" width="16"></a> [**Alpine.js**](https://github.com/alpinejs/alpine) | 31.9k | 2.7M | 8.9 MB | 322 | 6.8y | 4 days ago | MIT |
+| <a href="https://github.com/lit/lit"><img src="https://storage.googleapis.com/as93-screenshots/frontend-benchmarks/framework-logos/lit.png" alt="🔥" width="16"></a> [**Lit**](https://github.com/lit/lit) | 21.8k | 29.1M | 60.8 MB | 210 | 9.2y | 2 months ago | BSD-3-Clause |
+| <a href="https://github.com/vanjs-org/van"><img src="https://storage.googleapis.com/as93-screenshots/frontend-benchmarks/framework-logos/vanjs.png" alt="🚐" width="16"></a> [**VanJS**](https://github.com/vanjs-org/van) | 4.4k | 9.6k | 3.9 MB | 24 | 3.3y | 1 month ago | MIT |
+| <a href="https://github.com/sathvikc/lume-js"><img src="https://raw.githubusercontent.com/sathvikc/lume-js/refs/heads/main/lume-logo.png" alt="💡" width="16"></a> [**Lume.js**](https://github.com/sathvikc/lume-js) | 44 | 198 | 1.7 MB | 1 | 0.9y | 1 month ago | MIT |
+| <a href="https://github.com/withastro/astro"><img src="https://astro.build/assets/press/astro-logo-light-gradient.svg" alt="🚀" width="16"></a> [**Astro**](https://github.com/withastro/astro) | 62.2k | 19.3M | 228.6 MB | 1.2k | 5.5y | 3 hours ago | Unknown |
+| <a href="https://github.com/dashersw/gea"><img src="https://geajs.com/logo.png" alt="🌍" width="16"></a> [**Gea.js**](https://github.com/dashersw/gea) | 1.2k | 1.8k | 15.0 MB | 8 | 0.5y | 1 week ago | MIT |
 <!-- end_framework_stats -->
 
 ---
