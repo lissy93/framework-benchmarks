@@ -52,6 +52,7 @@ export default [
         
         // Additional Node.js/Browser globals
         URL: 'readonly',
+        AbortSignal: 'readonly',
         MutationObserver: 'readonly',
         ResizeObserver: 'readonly',
         IntersectionObserver: 'readonly',
@@ -138,6 +139,7 @@ export default [
         
         // Additional globals
         URL: 'readonly',
+        AbortSignal: 'readonly',
         MutationObserver: 'readonly',
         ResizeObserver: 'readonly',
         IntersectionObserver: 'readonly',
@@ -206,6 +208,18 @@ export default [
     },
   },
   
+  // Gea-specific rules
+  {
+    files: ['apps/geajs/**/*.{js,jsx}'],
+    rules: {
+      // Gea components are referenced only inside JSX templates
+      'no-unused-vars': ['warn', {
+        argsIgnorePattern: '^_',
+        varsIgnorePattern: '^(SearchForm|WeatherDisplay|LoadingState|ErrorState|WeatherContent|CurrentWeather|Forecast|ForecastItem|App)$'
+      }],
+    },
+  },
+
   // jQuery-specific rules
   {
     files: ['apps/jquery/**/*.js'],

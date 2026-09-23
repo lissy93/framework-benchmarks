@@ -114,6 +114,10 @@ class BundleSizeRunner(BenchmarkRunner):
             # Recursively search for files in build directory and subdirectories
             files.extend(directory.rglob(f"*{ext}"))
         
+        # Apps that build in place also keep a dist copy, don't count those twice
+        dist_dir = directory / "dist"
+        files = [f for f in files if dist_dir not in f.parents]
+
         # Filter out shared assets that are identical across frameworks
         return [f for f in files if self._is_framework_specific_file(f)]
     

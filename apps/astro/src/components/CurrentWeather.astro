@@ -1,0 +1,35 @@
+---
+const details = [
+  { label: 'Feels like', testId: 'feels-like' },
+  { label: 'Humidity', testId: 'humidity' },
+  { label: 'Wind Speed', testId: 'wind-speed' },
+  { label: 'Pressure', testId: 'pressure' },
+  { label: 'Cloud Cover', testId: 'cloud-cover' },
+  { label: 'Wind Direction', testId: 'wind-direction' }
+];
+---
+
+<section class="current-section">
+  <h2 class="section-title">Current Weather</h2>
+  <div class="weather-card" data-testid="current-weather">
+    <div class="current-weather">
+      <h3 class="current-weather__location" data-testid="current-location"></h3>
+      <div class="current-weather__main">
+        <div class="current-weather__icon" data-testid="current-icon"></div>
+        <div class="current-weather__temp-group">
+          <div class="current-weather__temp" data-testid="current-temperature"></div>
+          <div class="current-weather__condition" data-testid="current-condition"></div>
+        </div>
+      </div>
+
+      <div class="current-weather__details">
+        {details.map((detail) => (
+          <div class="weather-detail">
+            <div class="weather-detail__label">{detail.label}</div>
+            <div class="weather-detail__value" data-testid={detail.testId}></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

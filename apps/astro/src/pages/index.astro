@@ -1,0 +1,44 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SearchForm from '../components/SearchForm.astro';
+import LoadingState from '../components/LoadingState.astro';
+import ErrorState from '../components/ErrorState.astro';
+import WeatherContent from '../components/WeatherContent.astro';
+---
+
+<Layout title="Weather App - Astro">
+  <header class="header">
+    <div class="container">
+      <h1 class="header__title">Weather Front</h1>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="container">
+      <SearchForm />
+
+      <div class="weather-container" data-testid="weather-container">
+        <LoadingState />
+        <ErrorState />
+        <WeatherContent />
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p class="footer__text">
+        Built with Astro • MIT License •
+        <a href="https://github.com/Lissy93" class="footer__link" target="_blank" rel="noopener">
+          Alicia Sykes
+        </a>
+      </p>
+    </div>
+  </footer>
+</Layout>
+
+<script>
+  import { initWeatherApp } from '../scripts/weather-app.js';
+
+  initWeatherApp();
+</script>

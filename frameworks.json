@@ -38,6 +38,36 @@
       }
     },
     {
+      "id": "octane",
+      "name": "Octane",
+      "dir": "octane",
+      "assetsDir": "public",
+      "build": {
+        "buildCommand": "vite build",
+        "hasNodeModules": true,
+        "devCommand": "vite --port 3000",
+        "testCommand": "playwright test --config=tests/config/playwright-octane.config.js",
+        "lintFiles": [
+          "js",
+          "tsx"
+        ]
+      },
+      "meta": {
+        "emoji": "🏎️",
+        "iconName": "javascript",
+        "iconUrl": "https://raw.githubusercontent.com/octanejs/octane/main/icon.svg",
+        "website": "https://octanejs.dev/",
+        "docs": "https://octanejs.dev/docs/quick-start",
+        "github": "https://github.com/octanejs/octane",
+        "npmPackage": "octane",
+        "color": "#FF415A",
+        "accentColor": "#18181B",
+        "logo": "https://raw.githubusercontent.com/octanejs/octane/main/icon.svg",
+        "description": "Compiled React-style UI framework with direct DOM updates and no virtual DOM",
+        "longDescription": "Performance-first React-compatible framework that compiles components into direct DOM operations."
+      }
+    },
+    {
       "id": "angular",
       "name": "Angular",
       "dir": "angular",
@@ -430,6 +460,70 @@
         "logo": "https://raw.githubusercontent.com/sathvikc/lume-js/refs/heads/main/lume-logo.png",
         "description": "Minimal reactive state library (~2.4KB core, ~5.5KB global), no build step",
         "longDescription": "Standards-only reactive library with state, DOM binding, and keyed list rendering."
+      }
+    },
+    {
+      "id": "astro",
+      "name": "Astro",
+      "dir": "astro",
+      "assetsDir": "public",
+      "buildDir": "dist",
+      "build": {
+        "buildCommand": "astro build",
+        "hasNodeModules": true,
+        "devCommand": "astro dev --port 3000",
+        "testCommand": "playwright test --config=tests/config/playwright-astro.config.js",
+        "lintFiles": [
+          "js"
+        ]
+      },
+      "meta": {
+        "emoji": "🚀",
+        "iconName": "astro",
+        "website": "https://astro.build/",
+        "docs": "https://docs.astro.build/",
+        "github": "https://github.com/withastro/astro",
+        "npmPackage": "astro",
+        "color": "#BC52EE",
+        "accentColor": "#BC52EE",
+        "logo": "https://astro.build/assets/press/astro-logo-light-gradient.svg",
+        "description": "Content-first framework that ships zero JS by default, with opt-in islands",
+        "longDescription": "Server-first framework rendering static HTML at build time, hydrating only interactive islands."
+      },
+      "exampleRealApp": {
+        "title": "Awesome Privacy",
+        "description": "A curated list of privacy-respecting software and services",
+        "repo": "https://github.com/Lissy93/awesome-privacy",
+        "website": "https://awesome-privacy.xyz/",
+        "logo": "https://pixelflare.cc/alicia/logo/awesome-privacy/w256"
+      }
+    },
+    {
+      "id": "geajs",
+      "name": "Gea",
+      "displayName": "Gea.js",
+      "dir": "geajs",
+      "assetsDir": "public",
+      "build": {
+        "buildCommand": "vite build",
+        "hasNodeModules": true,
+        "devCommand": "vite --port 3000",
+        "testCommand": "playwright test --config=tests/config/playwright-geajs.config.js",
+        "lintFiles": ["js", "jsx"]
+      },
+      "meta": {
+        "emoji": "🌍",
+        "iconName": "googleearth",
+        "iconUrl": "https://geajs.com/logo.png",
+        "website": "https://geajs.com/",
+        "docs": "https://geajs.com/docs/getting-started.html",
+        "github": "https://github.com/dashersw/gea",
+        "npmPackage": "@geajs/core",
+        "color": "#00e5ff",
+        "accentColor": "#00e5ff",
+        "logo": "https://geajs.com/logo.png",
+        "description": "Compiler-first reactive framework that compiles JSX into surgical DOM updates",
+        "longDescription": "Compiler-first framework with proxy-based stores, no virtual DOM, and tiny bundles."
       }
     },
     {

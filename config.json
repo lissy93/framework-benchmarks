@@ -11,7 +11,7 @@
     "staticDir": "website/static"
   },
   "buildTools": {
-    "requiresNpx": ["vite", "ng", "playwright"],
+    "requiresNpx": ["vite", "ng", "playwright", "astro"],
     "pythonCommands": ["python3 -m http.server", "python -m http.server"]
   },
   "testing": {
@@ -146,7 +146,7 @@
     {"name": "benchmark", "command": "python scripts/benchmark/main.py"},
     {"name": "benchmark:lighthouse", "command": "python scripts/benchmark/lighthouse.py"},
     {"name": "verify", "command": "python scripts/verify/main.py"},
-    {"name": "build:static", "command": "python scripts/run/build.py -- --static-site"},
+    {"name": "build:static", "command": "python scripts/run/build.py --static-site"},
     {"name": "transform", "command": "python scripts/transform/benchmark_results.py --average --output-dir ./results "}
   ]
 }

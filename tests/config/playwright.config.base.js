@@ -9,6 +9,13 @@ function createConfig(framework) {
         url: 'http://localhost:3000/',
       }
     },
+    octane: {
+      baseURL: 'http://localhost:3000/?mock=true',
+      webServer: {
+        command: 'npm run dev:octane',
+        url: 'http://localhost:3000/',
+      }
+    },
     react: {
       baseURL: 'http://localhost:3000/?mock=true',
       webServer: {
@@ -97,6 +104,20 @@ function createConfig(framework) {
       baseURL: 'http://localhost:3000/?mock=true',
       webServer: {
         command: 'npm run dev:mjs',
+        url: 'http://localhost:3000/',
+      }
+    },
+    astro: {
+      baseURL: 'http://localhost:3000/?mock=true',
+      webServer: {
+        command: 'npm run dev:astro',
+        url: 'http://localhost:3000/',
+      }
+    },
+    geajs: {
+      baseURL: 'http://localhost:3000/?mock=true',
+      webServer: {
+        command: 'npm run dev:geajs',
         url: 'http://localhost:3000/',
       }
     }

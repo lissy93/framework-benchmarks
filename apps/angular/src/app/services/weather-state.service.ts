@@ -1,47 +1,37 @@
-import { Service, signal, inject } from '@angular/core';
-import { EMPTY, of } from 'rxjs';
-import { catchError, finalize, delay, switchMap } from 'rxjs/operators';
+import { Service, signal, inject, resource } from '@angular/core';
 import { WeatherService } from './weather.service';
-import type { AppState } from '../types/weather.types';
+import type { WeatherData } from '../types/weather.types';
 
 @Service()
 export class WeatherStateService {
   private readonly weatherService = inject(WeatherService);
 
-  private readonly stateSignal = signal<AppState>({
-    weatherData: null,
-    isLoading: false,
-    error: null
+  /** The city signal drives the resource reactively. */
+  readonly city = signal<string>(this.getInitialCity());
+
+  readonly weather = resource<WeatherData, { city: string }>({
+    params: () => ({ city: this.city() }),
+    loader: async({ params, abortSignal }) => {
+      // Add a small delay in test environments to make loading state visible
+      if (this.isTestEnvironment()) {
+        await this.wait(200);
+      }
+
+      return this.weatherService.getWeatherByCity(params.city, abortSignal);
+    }
   });
 
-  readonly state = this.stateSignal.asReadonly();
-
-  constructor() {
-    this.initializeApp();
-  }
-
-  private updateState(updates: Partial<AppState>): void {
-    this.stateSignal.update(currentState => ({ ...currentState, ...updates }));
+  private wait(ms: number): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
   loadWeather(city: string): void {
-    this.updateState({ isLoading: true, error: null });
+    this.city.set(city);
+    this.saveLocation(city);
+  }
 
-    // Add a small delay in test environments to make loading state visible
-    const weatherRequest = this.isTestEnvironment()
-      ? of(null).pipe(delay(200), switchMap(() => this.weatherService.getWeatherByCity(city)))
-      : this.weatherService.getWeatherByCity(city);
-
-    weatherRequest.pipe(
-      catchError(error => {
-        this.updateState({ error: error.message, isLoading: false });
-        return EMPTY;
-      }),
-      finalize(() => this.updateState({ isLoading: false }))
-    ).subscribe(weatherData => {
-      this.updateState({ weatherData, error: null });
-      this.saveLocation(city);
-    });
+  private getInitialCity(): string {
+    return this.getSavedLocation() ?? 'London';
   }
 
   private saveLocation(city: string): void {
@@ -59,52 +49,6 @@ export class WeatherStateService {
       console.warn('Could not load saved location:', error);
       return null;
     }
-  }
-
-  private initializeApp(): void {
-    const savedLocation = this.getSavedLocation();
-    if (savedLocation) {
-      this.loadWeather(savedLocation);
-      return;
-    }
-
-    // Try to get current location (unless in mock mode where we fallback to London)
-    if (this.shouldUseMockData()) {
-      // In mock mode, just load London as default without geolocation
-      this.loadWeather('London');
-      return;
-    }
-
-    this.updateState({ isLoading: true, error: null });
-
-    this.weatherService.getCurrentLocationWeather().pipe(
-      catchError(error => {
-        console.warn('Could not get current location:', error);
-        // Fallback to default location
-        this.loadWeather('London');
-        return EMPTY;
-      })
-    ).subscribe(weatherData => {
-      this.updateState({ weatherData, isLoading: false, error: null });
-    });
-  }
-
-  clearError(): void {
-    this.updateState({ error: null });
-  }
-
-  private shouldUseMockData(): boolean {
-    // Check if we're in a testing environment (Playwright sets specific user agents)
-    const isTestEnvironment = navigator.userAgent.includes('Playwright') ||
-                              navigator.userAgent.includes('HeadlessChrome');
-
-    // Don't use mock data if we're explicitly testing API errors
-    if (window.location.search.includes('mock=false')) {
-      return false;
-    }
-
-    // Use mock data if explicitly requested or if we're in a test environment
-    return window.location.search.includes('mock=true') || isTestEnvironment;
   }
 
   private isTestEnvironment(): boolean {
