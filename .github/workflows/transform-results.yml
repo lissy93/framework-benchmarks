@@ -10,10 +10,6 @@ permissions:
   contents: write
   actions: read
 
-env:
-  NODE_VERSION: '22'
-  PYTHON_VERSION: '3.11'
-
 jobs:
   transform-results:
     name: Transform & Commit Results
@@ -31,7 +27,7 @@ jobs:
       - name: 🐍 Setup Python
         uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
-          python-version: ${{ env.PYTHON_VERSION }}
+          python-version-file: .python-version
           cache: 'pip'
 
       - name: 📦 Install Python Dependencies

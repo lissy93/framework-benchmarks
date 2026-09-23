@@ -1,6 +1,6 @@
 <h1 align="center">🌈 Framework Benchmarks</h1>
 <p align="center">
-	<i>The same weather app built in 12 different frontend frameworks</i><br>
+	<i>The same weather app built in 16 different frontend frameworks</i><br>
     For automated cross-framework web performance benchmarking
   <br>
 	<a href="https://framework-benchmarks.as93.net"><img width="96" src="https://storage.googleapis.com/as93-screenshots/project-logos/framework-benchmarks.png" /></a><br>
@@ -9,7 +9,7 @@
 </p>
 
 ### Intro
-I've built the same weather app in 12 different frontend web frameworks.
+I've built the same weather app in 16 different frontend web frameworks.
 Along with automated scripts to benchmark each of their performance, quality and capabilities.
 To finally answer the age-old question: "Which is the _best_* frontend framework?"<br>
 So, without further ado, let's see how every framework weathers the storm! ⛈️
@@ -101,12 +101,11 @@ Then upload the app's build output (`dist/`, `build/` or the app root, depending
 ### Adding a Framework
 1. Create app directory: `apps/[app-name]/` with `package.json`, a build config (e.g. `vite.config.js`), and a `src/` dir
 2. Register the framework in [`frameworks.json`](https://github.com/lissy93/framework-benchmarks/blob/main/frameworks.json)
-3. Add a test config at `tests/config/playwright-[app-name].config.js`
-4. Run `npm run setup` to generate scripts, sync shared assets and mocks, and install deps. Verify with `npm run check`
-5. Code your app!<br>
-  5.1. Preview locally with `npm run dev:[app-name]`<br>
-  5.2. then test with `npm run test:[app-name]` to ensure it meets the [requirements spec](#requirement-spec)
-6. Validate everything passes with the test, lint and build scripts
+3. Run `npm run setup` to generate the npm scripts and test config, sync shared assets and mocks, and install deps. Verify with `npm run check`
+4. Code your app!<br>
+  4.1. Preview locally with `npm run dev:[app-name]`<br>
+  4.2. then test with `npm run test:[app-name]` to ensure it meets the [requirements spec](#requirement-spec)
+5. Validate everything passes with the test, lint and build scripts
 
 ---
 

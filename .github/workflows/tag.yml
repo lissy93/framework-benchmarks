@@ -138,7 +138,7 @@ jobs:
         if: env.IS_MANUAL == 'true' || steps.check_pr.outputs.needs_tag == 'true'
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6 # zizmor: ignore[cache-poisoning] no cache is configured here
         with:
-          node-version: '22'
+          node-version-file: .nvmrc
 
       - name: 👤 Configure git identity and remote
         if: env.IS_MANUAL == 'true' || steps.check_pr.outputs.needs_tag == 'true'

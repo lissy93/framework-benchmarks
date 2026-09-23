@@ -31,10 +31,6 @@ on:
   schedule:
     - cron: '30 4 * * *'  # Daily at 04:30 UTC
 
-env:
-  NODE_VERSION: '22'
-  PYTHON_VERSION: '3.11'
-
 permissions:
   contents: read
 
@@ -54,13 +50,13 @@ jobs:
       - name: 🔧 Setup Node.js
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
-          node-version: ${{ env.NODE_VERSION }}
+          node-version-file: .nvmrc
           cache: 'npm'
 
       - name: 🐍 Setup Python
         uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
-          python-version: ${{ env.PYTHON_VERSION }}
+          python-version-file: .python-version
           cache: 'pip'
 
       - name: 📦 Install System Dependencies
