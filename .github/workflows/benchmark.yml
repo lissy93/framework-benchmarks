@@ -31,10 +31,6 @@ on:
   schedule:
     - cron: '30 4 * * *'  # Daily at 04:30 UTC
 
-env:
-  NODE_VERSION: '22'
-  PYTHON_VERSION: '3.11'
-
 permissions:
   contents: read
 
@@ -46,21 +42,21 @@ jobs:
     
     steps:
       - name: 📥 Checkout Repository
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           fetch-depth: 1
           persist-credentials: false
 
       - name: 🔧 Setup Node.js
-        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
-          node-version: ${{ env.NODE_VERSION }}
+          node-version-file: .nvmrc
           cache: 'npm'
 
       - name: 🐍 Setup Python
         uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
-          python-version: ${{ env.PYTHON_VERSION }}
+          python-version-file: .python-version
           cache: 'pip'
 
       - name: 📦 Install System Dependencies
