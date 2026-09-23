@@ -1,0 +1,24 @@
+{
+  "name": "weather-app-mjs",
+  "version": "1.0.0",
+  "description": "Weather app built with ModularJS",
+  "type": "module",
+  "scripts": {
+    "dev": "mjs dev --root . --port 3939",
+    "build": "mjs build --root . --prod && node critical-css.mjs",
+    "test": "playwright test --config=../../tests/config/playwright-mjs.config.js",
+    "test:ui": "playwright test --config=../../tests/config/playwright-mjs.config.js --ui"
+  },
+  "keywords": [
+    "weather",
+    "modularjs",
+    "frontend"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "beasties": "^0.4.2",
+    "modularjs-framework": "^2.4.4"
+  }
+}

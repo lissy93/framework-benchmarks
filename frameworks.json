@@ -10,7 +10,10 @@
         "hasNodeModules": true,
         "devCommand": "vite",
         "testCommand": "playwright test --config=tests/config/playwright-react.config.js",
-        "lintFiles": ["js", "jsx"]
+        "lintFiles": [
+          "js",
+          "jsx"
+        ]
       },
       "meta": {
         "emoji": "⚛️",
@@ -44,7 +47,10 @@
         "hasNodeModules": true,
         "devCommand": "ng serve --port 3000",
         "testCommand": "playwright test --config=tests/config/playwright-angular.config.js",
-        "lintFiles": ["ts", "html"]
+        "lintFiles": [
+          "ts",
+          "html"
+        ]
       },
       "meta": {
         "emoji": "🅰️",
@@ -79,7 +85,10 @@
         "hasNodeModules": true,
         "devCommand": "vite dev --port 3000",
         "testCommand": "playwright test --config=tests/config/playwright-svelte.config.js",
-        "lintFiles": ["js", "svelte"]
+        "lintFiles": [
+          "js",
+          "svelte"
+        ]
       },
       "meta": {
         "emoji": "🔥",
@@ -113,7 +122,10 @@
         "hasNodeModules": true,
         "devCommand": "vite",
         "testCommand": "playwright test --config=tests/config/playwright-preact.config.js",
-        "lintFiles": ["js", "jsx"]
+        "lintFiles": [
+          "js",
+          "jsx"
+        ]
       },
       "meta": {
         "emoji": "💜",
@@ -148,7 +160,10 @@
         "hasNodeModules": true,
         "devCommand": "vite",
         "testCommand": "playwright test --config=tests/config/playwright-solid.config.js",
-        "lintFiles": ["js", "jsx"]
+        "lintFiles": [
+          "js",
+          "jsx"
+        ]
       },
       "meta": {
         "emoji": "🚀",
@@ -182,7 +197,10 @@
         "hasNodeModules": true,
         "devCommand": "vite --port 3000",
         "testCommand": "playwright test --config=tests/config/playwright-qwik.config.js",
-        "lintFiles": ["ts", "tsx"]
+        "lintFiles": [
+          "ts",
+          "tsx"
+        ]
       },
       "meta": {
         "emoji": "⚡",
@@ -217,7 +235,10 @@
         "hasNodeModules": true,
         "devCommand": "vite --port 3000",
         "testCommand": "playwright test --config=tests/config/playwright-vue.config.js",
-        "lintFiles": ["js", "vue"]
+        "lintFiles": [
+          "js",
+          "vue"
+        ]
       },
       "meta": {
         "emoji": "💚",
@@ -251,7 +272,9 @@
         "hasNodeModules": true,
         "devCommand": "vite --port 3000",
         "testCommand": "playwright test --config=tests/config/playwright-jquery.config.js",
-        "lintFiles": ["js"]
+        "lintFiles": [
+          "js"
+        ]
       },
       "meta": {
         "emoji": "💙",
@@ -280,7 +303,9 @@
         "hasNodeModules": false,
         "devCommand": "python3 -m http.server 3000 || python -m http.server 3000",
         "testCommand": "playwright test --config=tests/config/playwright-alpine.config.js",
-        "lintFiles": ["js"]
+        "lintFiles": [
+          "js"
+        ]
       },
       "meta": {
         "emoji": "🏔️",
@@ -314,7 +339,9 @@
         "hasNodeModules": true,
         "devCommand": "vite --port 3000",
         "testCommand": "playwright test --config=tests/config/playwright-lit.config.js",
-        "lintFiles": ["js"]
+        "lintFiles": [
+          "js"
+        ]
       },
       "meta": {
         "emoji": "🔥",
@@ -349,7 +376,9 @@
         "hasNodeModules": true,
         "devCommand": "vite --port 3000",
         "testCommand": "playwright test --config=tests/config/playwright-vanjs.config.js",
-        "lintFiles": ["js"]
+        "lintFiles": [
+          "js"
+        ]
       },
       "meta": {
         "emoji": "🚐",
@@ -384,7 +413,9 @@
         "hasNodeModules": false,
         "devCommand": "python3 -m http.server 3000 || python -m http.server 3000",
         "testCommand": "playwright test --config=tests/config/playwright-lume-js.config.js",
-        "lintFiles": ["js"]
+        "lintFiles": [
+          "js"
+        ]
       },
       "meta": {
         "emoji": "💡",
@@ -413,7 +444,9 @@
         "hasNodeModules": false,
         "devCommand": "python3 -m http.server 3000 || python -m http.server 3000",
         "testCommand": "playwright test --config=tests/config/playwright-vanilla.config.js",
-        "lintFiles": ["js"]
+        "lintFiles": [
+          "js"
+        ]
       },
       "meta": {
         "emoji": "🧪",
@@ -434,6 +467,35 @@
         "repo": "",
         "website": "",
         "logo": ""
+      }
+    },
+    {
+      "id": "mjs",
+      "name": "ModularJS",
+      "dir": "mjs",
+      "assetsDir": "public",
+      "buildDir": "dist",
+      "build": {
+        "buildCommand": "npx mjs build --root . --prod && node critical-css.mjs",
+        "hasNodeModules": true,
+        "devCommand": "npx mjs dev --root . --port 3000",
+        "testCommand": "playwright test --config=tests/config/playwright-mjs.config.js",
+        "lintFiles": [
+          "js"
+        ]
+      },
+      "meta": {
+        "emoji": "🧩",
+        "iconName": "javascript",
+        "website": "https://mjs.rapturestudio.fr",
+        "docs": "",
+        "github": "https://github.com/RaptureStudio42/modularjs-framework",
+        "npmPackage": "modularjs-framework",
+        "color": "#00BFA5",
+        "accentColor": "#00BFA5",
+        "logo": "",
+        "description": "Compile-time reactive framework compiling components to native Web Components",
+        "longDescription": "A compile-time framework with a Civet-flavoured template language, compiling components straight to native Web Components with fine-grained reactivity."
       }
     }
   ]
