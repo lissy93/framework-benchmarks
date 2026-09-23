@@ -106,9 +106,6 @@
                         <a href="/react/" class="dropdown-item" role="menuitem">
                             React
                         </a>
-                        <a href="/octane/" class="dropdown-item" role="menuitem">
-                            Octane
-                        </a>
                         <a href="/angular/" class="dropdown-item" role="menuitem">
                             Angular
                         </a>
@@ -139,11 +136,14 @@
                         <a href="/vanjs/" class="dropdown-item" role="menuitem">
                             VanJS
                         </a>
+                        <a href="/astro/" class="dropdown-item" role="menuitem">
+                            Astro
+                        </a>
                         <a href="/lume-js/" class="dropdown-item" role="menuitem">
                             Lume.js
                         </a>
-                        <a href="/astro/" class="dropdown-item" role="menuitem">
-                            Astro
+                        <a href="/octane/" class="dropdown-item" role="menuitem">
+                            Octane
                         </a>
                         <a href="/geajs/" class="dropdown-item" role="menuitem">
                             Gea
@@ -205,20 +205,6 @@
                  alt="⚛️"
                  onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
             <div class="framework-fallback" style="display: none;">R</div>
-        </a>
-        <a
-            href="/octane/"
-            class="framework-card"
-            style="--fw-color: #FF415A;"
-            data-framework="octane"
-            title="Octane"
-        >
-            <img class="framework-icon" 
-                 width="32" 
-                 src="https://raw.githubusercontent.com/octanejs/octane/main/icon.svg"
-                 alt="🏎️"
-                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-            <div class="framework-fallback" style="display: none;">O</div>
         </a>
         <a
             href="/angular/"
@@ -361,6 +347,20 @@
             <div class="framework-fallback" style="display: none;">V</div>
         </a>
         <a
+            href="/astro/"
+            class="framework-card"
+            style="--fw-color: #BC52EE;"
+            data-framework="astro"
+            title="Astro"
+        >
+            <img class="framework-icon" 
+                 width="32" 
+                 src="https://cdn.simpleicons.org/astro"
+                 alt="🚀"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <div class="framework-fallback" style="display: none;">A</div>
+        </a>
+        <a
             href="/lume-js/"
             class="framework-card"
             style="--fw-color: #7C3AED;"
@@ -375,18 +375,18 @@
             <div class="framework-fallback" style="display: none;">L</div>
         </a>
         <a
-            href="/astro/"
+            href="/octane/"
             class="framework-card"
-            style="--fw-color: #BC52EE;"
-            data-framework="astro"
-            title="Astro"
+            style="--fw-color: #FF415A;"
+            data-framework="octane"
+            title="Octane"
         >
             <img class="framework-icon" 
                  width="32" 
-                 src="https://cdn.simpleicons.org/astro"
-                 alt="🚀"
+                 src="https://octanejs.dev/icon-512.png"
+                 alt="🏎️"
                  onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-            <div class="framework-fallback" style="display: none;">A</div>
+            <div class="framework-fallback" style="display: none;">O</div>
         </a>
         <a
             href="/geajs/"
@@ -441,15 +441,6 @@
                        checked>
                 <span class="checkbox-indicator"></span>
                 <span class="framework-label">React</span>
-            </label>
-            <label class="framework-checkbox" style="--fw-color: #FF415A;">
-                <input type="checkbox" 
-                       class="framework-toggle" 
-                       id="toggle-octane" 
-                       data-framework="octane"
-                       checked>
-                <span class="checkbox-indicator"></span>
-                <span class="framework-label">Octane</span>
             </label>
             <label class="framework-checkbox" style="--fw-color: #DD0031;">
                 <input type="checkbox" 
@@ -541,6 +532,15 @@
                 <span class="checkbox-indicator"></span>
                 <span class="framework-label">VanJS</span>
             </label>
+            <label class="framework-checkbox" style="--fw-color: #BC52EE;">
+                <input type="checkbox" 
+                       class="framework-toggle" 
+                       id="toggle-astro" 
+                       data-framework="astro"
+                       checked>
+                <span class="checkbox-indicator"></span>
+                <span class="framework-label">Astro</span>
+            </label>
             <label class="framework-checkbox" style="--fw-color: #7C3AED;">
                 <input type="checkbox" 
                        class="framework-toggle" 
@@ -550,14 +550,14 @@
                 <span class="checkbox-indicator"></span>
                 <span class="framework-label">Lume.js</span>
             </label>
-            <label class="framework-checkbox" style="--fw-color: #BC52EE;">
+            <label class="framework-checkbox" style="--fw-color: #FF415A;">
                 <input type="checkbox" 
                        class="framework-toggle" 
-                       id="toggle-astro" 
-                       data-framework="astro"
+                       id="toggle-octane" 
+                       data-framework="octane"
                        checked>
                 <span class="checkbox-indicator"></span>
-                <span class="framework-label">Astro</span>
+                <span class="framework-label">Octane</span>
             </label>
             <label class="framework-checkbox" style="--fw-color: #00e5ff;">
                 <input type="checkbox" 
@@ -707,15 +707,6 @@
             <div class="framework-fallback" style="display: none;">R</div>
             <div class="framework-name">React</div>
         </a>
-        <a href="/octane/" class="framework-card" style="--fw-color: #FF415A;" data-framework="octane">
-            <img class="framework-icon" 
-                 width="64" 
-                 src="https://raw.githubusercontent.com/octanejs/octane/main/icon.svg"
-                 alt="🏎️"
-                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-            <div class="framework-fallback" style="display: none;">O</div>
-            <div class="framework-name">Octane</div>
-        </a>
         <a href="/angular/" class="framework-card" style="--fw-color: #DD0031;" data-framework="angular">
             <img class="framework-icon" 
                  width="64" 
@@ -806,6 +797,15 @@
             <div class="framework-fallback" style="display: none;">V</div>
             <div class="framework-name">VanJS</div>
         </a>
+        <a href="/astro/" class="framework-card" style="--fw-color: #BC52EE;" data-framework="astro">
+            <img class="framework-icon" 
+                 width="64" 
+                 src="https://cdn.simpleicons.org/astro"
+                 alt="🚀"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <div class="framework-fallback" style="display: none;">A</div>
+            <div class="framework-name">Astro</div>
+        </a>
         <a href="/lume-js/" class="framework-card" style="--fw-color: #7C3AED;" data-framework="lume-js">
             <img class="framework-icon" 
                  width="64" 
@@ -815,14 +815,14 @@
             <div class="framework-fallback" style="display: none;">L</div>
             <div class="framework-name">Lume.js</div>
         </a>
-        <a href="/astro/" class="framework-card" style="--fw-color: #BC52EE;" data-framework="astro">
+        <a href="/octane/" class="framework-card" style="--fw-color: #FF415A;" data-framework="octane">
             <img class="framework-icon" 
                  width="64" 
-                 src="https://cdn.simpleicons.org/astro"
-                 alt="🚀"
+                 src="https://octanejs.dev/icon-512.png"
+                 alt="🏎️"
                  onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-            <div class="framework-fallback" style="display: none;">A</div>
-            <div class="framework-name">Astro</div>
+            <div class="framework-fallback" style="display: none;">O</div>
+            <div class="framework-name">Octane</div>
         </a>
         <a href="/geajs/" class="framework-card" style="--fw-color: #00e5ff;" data-framework="geajs">
             <img class="framework-icon" 
@@ -852,10 +852,6 @@
         <li style="--fw-color: #61DAFB;">
             <h4>React</h4>
             <code>http://localhost:3000/react/app?mock=true</code>
-        </li>
-        <li style="--fw-color: #FF415A;">
-            <h4>Octane</h4>
-            <code>http://localhost:3000/octane/app?mock=true</code>
         </li>
         <li style="--fw-color: #DD0031;">
             <h4>Angular</h4>
@@ -897,13 +893,17 @@
             <h4>VanJS</h4>
             <code>http://localhost:3000/vanjs/app?mock=true</code>
         </li>
+        <li style="--fw-color: #BC52EE;">
+            <h4>Astro</h4>
+            <code>http://localhost:3000/astro/app?mock=true</code>
+        </li>
         <li style="--fw-color: #7C3AED;">
             <h4>Lume.js</h4>
             <code>http://localhost:3000/lume-js/app?mock=true</code>
         </li>
-        <li style="--fw-color: #BC52EE;">
-            <h4>Astro</h4>
-            <code>http://localhost:3000/astro/app?mock=true</code>
+        <li style="--fw-color: #FF415A;">
+            <h4>Octane</h4>
+            <code>http://localhost:3000/octane/app?mock=true</code>
         </li>
         <li style="--fw-color: #00e5ff;">
             <h4>Gea</h4>

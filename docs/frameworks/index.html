@@ -119,9 +119,6 @@
                         <a href="/react/" class="dropdown-item" role="menuitem">
                             React
                         </a>
-                        <a href="/octane/" class="dropdown-item" role="menuitem">
-                            Octane
-                        </a>
                         <a href="/angular/" class="dropdown-item" role="menuitem">
                             Angular
                         </a>
@@ -152,11 +149,14 @@
                         <a href="/vanjs/" class="dropdown-item" role="menuitem">
                             VanJS
                         </a>
+                        <a href="/astro/" class="dropdown-item" role="menuitem">
+                            Astro
+                        </a>
                         <a href="/lume-js/" class="dropdown-item" role="menuitem">
                             Lume.js
                         </a>
-                        <a href="/astro/" class="dropdown-item" role="menuitem">
-                            Astro
+                        <a href="/octane/" class="dropdown-item" role="menuitem">
+                            Octane
                         </a>
                         <a href="/geajs/" class="dropdown-item" role="menuitem">
                             Gea
@@ -181,142 +181,76 @@
     
     <div class="docs-content">
         <h1>🏗️ Framework Management</h1>
-<p>This project uses a centralized configuration system to manage all framework definitions, eliminating hardcoded framework lists throughout the codebase.</p>
-<h2>📋 Central Configuration</h2>
-<p>All framework definitions are stored in <a href="./frameworks.json"><code>frameworks.json</code></a>:</p>
+<p>Every framework is defined once, in <code>frameworks.json</code>. The scripts, GitHub Actions workflows, website and READMEs all read from it, so there are no framework lists to keep in sync by hand.</p>
+<h2>📋 Configuration</h2>
 <div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">"frameworks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"vanilla"</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vanilla JS"</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vanilla JavaScript"</span><span class="p">,</span><span class="w"> </span>
-<span class="w">      </span><span class="nt">"icon"</span><span class="p">:</span><span class="w"> </span><span class="s2">"🧪"</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">"dir"</span><span class="p">:</span><span class="w"> </span><span class="s2">"vanilla"</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">"hasNodeModules"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">"buildCommand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"echo 'No build step required'"</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">"devCommand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"python3 -m http.server 3000 || python -m http.server 3000"</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">"testCommand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"playwright test --config=tests/config/playwright-vanilla.config.js"</span>
+<span class="w">      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"vue"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vue"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vue 3"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"dir"</span><span class="p">:</span><span class="w"> </span><span class="s2">"vue"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"assetsDir"</span><span class="p">:</span><span class="w"> </span><span class="s2">"public"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"build"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"buildCommand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"vite build"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"hasNodeModules"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"devCommand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"vite --port 3000"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"lintFiles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"js"</span><span class="p">,</span><span class="w"> </span><span class="s2">"vue"</span><span class="p">]</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"emoji"</span><span class="p">:</span><span class="w"> </span><span class="s2">"💚"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"iconName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"vuedotjs"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"website"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://vuejs.org/"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"docs"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://vuejs.org/guide/"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"github"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/vuejs/core"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"npmPackage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"vue"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#4FC08D"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"accentColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#4FC08D"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"logo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://.../vue.png"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"One-line summary shown in lists"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"longDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Longer summary shown on the framework page"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"video"</span><span class="p">:</span><span class="w"> </span><span class="s2">"YouTube video ID"</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">"exampleRealApp"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dashy"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Highly configurable self-hostable server dashboard"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"repo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/Lissy93/dashy"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"website"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://dashy.to"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"logo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://.../dashy.png"</span>
+<span class="w">      </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="c1">// ... more frameworks</span>
 <span class="w">  </span><span class="p">]</span>
 <span class="p">}</span>
 </code></pre></div>
 
-<h2>🔧 Framework Properties</h2>
+<h2>🔧 Properties</h2>
 <ul>
-<li><strong><code>id</code></strong>: Unique identifier used in scripts and file names</li>
-<li><strong><code>name</code></strong>: Display name for logs and UI</li>
-<li><strong><code>displayName</code></strong>: Full formal name</li>
-<li><strong><code>icon</code></strong>: Emoji for visual identification</li>
-<li><strong><code>dir</code></strong>: Directory name in <code>apps/</code></li>
-<li><strong><code>hasNodeModules</code></strong>: Whether the framework needs <code>npm install</code></li>
-<li><strong><code>buildCommand</code></strong>: Production build command</li>
-<li><strong><code>devCommand</code></strong>: Development server command  </li>
-<li><strong><code>testCommand</code></strong>: Test command with config path</li>
+<li><strong><code>id</code></strong>: Unique identifier, used in script names, file names and URLs</li>
+<li><strong><code>name</code></strong>: Display name (<strong><code>displayName</code></strong> optionally overrides it in the READMEs)</li>
+<li><strong><code>dir</code></strong>: Directory under <code>apps/</code></li>
+<li><strong><code>assetsDir</code></strong>: Directory inside the app that shared assets are synced to (usually <code>public</code>)</li>
+<li><strong><code>buildDir</code></strong>: Build output directory, if it isn't <code>dist</code> (<code>.</code> for apps with no build step)</li>
+<li><strong><code>build.buildCommand</code></strong> / <strong><code>build.devCommand</code></strong>: Run from the app directory. <code>npx</code> is added automatically for the tools listed under <code>buildTools.requiresNpx</code> in <code>config.json</code></li>
+<li><strong><code>build.hasNodeModules</code></strong>: Whether the app needs <code>npm install</code></li>
+<li><strong><code>build.lintFiles</code></strong>: File extensions ESLint should check</li>
+<li><strong><code>meta</code></strong>: Links, branding and descriptions used by the website and READMEs</li>
+<li><strong><code>exampleRealApp</code></strong>: Optional real-world app built with the framework, shown on its website page</li>
 </ul>
-<h2>🚀 Usage</h2>
-<h3>Generate Scripts</h3>
-<p>After modifying <code>frameworks.json</code>, regenerate all dependent files:</p>
-<div class="codehilite"><pre><span></span><code><span class="c1"># Update package.json scripts</span>
-npm<span class="w"> </span>run<span class="w"> </span>generate-scripts
-
-<span class="c1"># Or run directly</span>
-node<span class="w"> </span>scripts/generate-scripts.js
-</code></pre></div>
-
-<h3>Available Commands</h3>
-<div class="codehilite"><pre><span></span><code><span class="c1"># List all frameworks with details</span>
-node<span class="w"> </span>scripts/generate-scripts.js<span class="w"> </span>list
-
-<span class="c1"># Get framework IDs only (comma-separated)</span>
-node<span class="w"> </span>scripts/generate-scripts.js<span class="w"> </span>ids
-
-<span class="c1"># Get framework list for GitHub Actions</span>
-node<span class="w"> </span>scripts/generate-scripts.js<span class="w"> </span>github
-</code></pre></div>
-
-<h3>Adding a New Framework</h3>
+<p>The full schema is <code>scripts/verify/frameworks-schema.json</code>. <code>npm run verify</code> validates <code>frameworks.json</code> against it.</p>
+<h2>➕ Adding a Framework</h2>
 <ol>
-<li>
-<p><strong>Add to <code>frameworks.json</code></strong>:<br />
-<code>json
-   {
-     "id": "vue",
-     "name": "Vue.js",
-     "displayName": "Vue.js",
-     "icon": "💚",
-     "dir": "vue",
-     "hasNodeModules": true,
-     "buildCommand": "vite build",
-     "devCommand": "vite dev --port 3000",
-     "testCommand": "playwright test --config=tests/config/playwright-vue.config.js"
-   }</code></p>
-</li>
-<li>
-<p><strong>Regenerate scripts</strong>:<br />
-<code>bash
-   npm run generate-scripts</code></p>
-</li>
-<li>
-<p><strong>Create required files</strong>:</p>
-</li>
-<li><code>apps/vue/</code> - Framework app directory</li>
-<li>
-<p><code>tests/config/playwright-vue.config.js</code> - Test configuration</p>
-</li>
-<li>
-<p><strong>That's it!</strong> All scripts, GitHub Actions, and tooling will automatically include the new framework.</p>
-</li>
+<li>Build the app in <code>apps/&lt;id&gt;/</code></li>
+<li>Add its entry to <code>frameworks.json</code></li>
+<li>Run <code>npm run generate-scripts</code>, which regenerates the <code>package.json</code> scripts and creates <code>tests/config/playwright-&lt;id&gt;.config.js</code></li>
+<li>Run <code>npm run setup</code> to install its dependencies and sync the shared assets</li>
 </ol>
-<h2>📁 What Gets Generated</h2>
-<p>The centralized config automatically updates:</p>
-<h3><code>package.json</code></h3>
-<ul>
-<li><code>test:frameworkId</code> scripts</li>
-<li><code>dev:frameworkId</code> scripts  </li>
-<li>Main <code>test</code> script that runs all frameworks</li>
-</ul>
-<h3>GitHub Actions (<code>.github/workflows/test.yml</code>)</h3>
-<ul>
-<li>Framework list detection</li>
-<li>Dynamic workflow inputs</li>
-</ul>
-<h3>Scripts</h3>
-<ul>
-<li><code>scripts/run-all-tests.js</code> - Test runner</li>
-<li><code>scripts/sync-assets.js</code> - Asset synchronization (already dynamic)</li>
-</ul>
-<h2>🎯 Benefits</h2>
-<p>✅ <strong>Single source of truth</strong> - One place to manage all frameworks<br />
-✅ <strong>No more hardcoded lists</strong> - Automatic synchronization<br />
-✅ <strong>Easy to add frameworks</strong> - Just update config + regenerate<br />
-✅ <strong>Consistent naming</strong> - All scripts follow same patterns<br />
-✅ <strong>Less maintenance</strong> - No manual updates in multiple files<br />
-✅ <strong>Self-documenting</strong> - Config includes all metadata  </p>
-<h2>⚡ Quick Commands</h2>
-<div class="codehilite"><pre><span></span><code><span class="c1"># See all frameworks</span>
-npm<span class="w"> </span>run<span class="w"> </span>generate-scripts<span class="w"> </span>--<span class="w"> </span>list
-
-<span class="c1"># Add new framework and regenerate everything</span>
-<span class="c1"># 1. Edit frameworks.json</span>
-<span class="c1"># 2. Run:</span>
-npm<span class="w"> </span>run<span class="w"> </span>generate-scripts
-
-<span class="c1"># Run tests for all frameworks  </span>
-npm<span class="w"> </span><span class="nb">test</span>
-
-<span class="c1"># Run specific framework tests</span>
-npm<span class="w"> </span>run<span class="w"> </span>test:vue<span class="w">    </span><span class="c1"># (after adding vue)</span>
+<p>The GitHub Actions matrices, website and READMEs pick the new framework up automatically.</p>
+<h2>⚡ Useful Commands</h2>
+<div class="codehilite"><pre><span></span><code>npm<span class="w"> </span>run<span class="w"> </span>generate-scripts<span class="w">           </span><span class="c1"># Regenerate package.json scripts and test configs</span>
+python<span class="w"> </span>scripts/get_frameworks.py<span class="w">   </span><span class="c1"># Comma-separated framework IDs (used by the CI matrices)</span>
+npm<span class="w"> </span>run<span class="w"> </span>verify<span class="w">                     </span><span class="c1"># Validate frameworks.json and config.json, then check, test and lint</span>
+npm<span class="w"> </span>run<span class="w"> </span>test:vue<span class="w">                   </span><span class="c1"># Run the tests against one framework</span>
 </code></pre></div>
-
-<h2>🔍 File Locations</h2>
-<ul>
-<li><strong>Config</strong>: <code>frameworks.json</code></li>
-<li><strong>Generator</strong>: <code>scripts/generate-scripts.js</code> </li>
-<li><strong>Package scripts</strong>: Auto-generated in <code>package.json</code></li>
-<li><strong>GitHub workflow</strong>: <code>.github/workflows/test.yml</code></li>
-<li><strong>Test runner</strong>: <code>scripts/run-all-tests.js</code></li>
-</ul>
     </div>
 </div>
     </main>
