@@ -75,7 +75,7 @@ jobs:
       - name: 📂 Check PR for code changes and version bump
         id: check_pr
         if: env.IS_MANUAL != 'true'
-        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const { owner, repo } = context.repo;
@@ -136,7 +136,7 @@ jobs:
 
       - name: 🔧 Setup Node.js
         if: env.IS_MANUAL == 'true' || steps.check_pr.outputs.needs_tag == 'true'
-        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6 # zizmor: ignore[cache-poisoning] no cache is configured here
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v6 # zizmor: ignore[cache-poisoning] no cache is configured here
         with:
           node-version-file: .nvmrc
 
@@ -154,7 +154,7 @@ jobs:
       - name: 🔍 Extract referenced issues
         id: issues
         if: env.IS_MANUAL != 'true' && steps.check_pr.outputs.needs_tag == 'true'
-        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const body = context.payload.pull_request.body || '';
@@ -248,7 +248,7 @@ jobs:
           && steps.check_pr.outputs.needs_tag == 'true'
           && steps.issues.outputs.numbers != ''
         continue-on-error: true
-        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         env:
           ISSUES: ${{ steps.issues.outputs.numbers }}
         with:
