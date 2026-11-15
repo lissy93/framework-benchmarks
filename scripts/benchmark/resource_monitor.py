@@ -307,7 +307,7 @@ class BrowserResourceMonitor:
             self.websocket_url = target_ws
             self.websocket = await websockets.connect(
                 self.websocket_url, 
-                timeout=10, 
+                open_timeout=10, 
                 ping_interval=None
             )
             return True
