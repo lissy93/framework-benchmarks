@@ -9,6 +9,7 @@ import tempfile
 import time
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
+from urllib.parse import urljoin, urlparse
 
 import requests
 from rich.console import Console
@@ -17,6 +18,9 @@ from rich.table import Table
 from base import BenchmarkRunner, BenchmarkResult
 
 console = Console()
+
+SCRIPT_SRC_RE = re.compile(r'''<script\b[^>]*\bsrc=["']([^"']+)["']''', re.IGNORECASE)
+STATIC_IMPORT_RE = re.compile(r'''\b(?:import|export)\s*(?:[^"';()]*?\bfrom\s*)?["']([^"']+)["']''')
 
 
 class DevServerRunner(BenchmarkRunner):
@@ -119,6 +123,8 @@ class DevServerRunner(BenchmarkRunner):
                             
                         # Accept if it looks like a development app
                         if any(keyword in content for keyword in ["weather", "vite", "<!doctype html", "webpack", "hmr", "hot"]):
+                            # Servers that compile on request are not ready until the page scripts are served
+                            self._fetch_page_scripts(url, response.text)
                             total_time = time.time() - start_time
                             console.print(f"[dim]✅ Dev server ready on port {try_port} in {total_time:.2f}s[/dim]")
                             return total_time, try_port
@@ -141,6 +147,26 @@ class DevServerRunner(BenchmarkRunner):
         
         raise TimeoutError(f"Dev server did not become ready on any port within {timeout}s")
     
+    def _fetch_page_scripts(self, page_url: str, html: str, max_modules: int = 2000):
+        """Fetch the page scripts and their static imports, as a browser does before the app runs."""
+        origin = urlparse(page_url).netloc
+        pending = [urljoin(page_url, src) for src in SCRIPT_SRC_RE.findall(html)]
+        seen = set()
+        while pending and len(seen) < max_modules:
+            url = pending.pop()
+            if url in seen or urlparse(url).netloc != origin:
+                continue
+            seen.add(url)
+            try:
+                response = requests.get(url, timeout=30)
+            except requests.RequestException:
+                continue
+            if response.status_code != 200:
+                continue
+            for spec in STATIC_IMPORT_RE.findall(response.text):
+                if spec.startswith(("/", "./", "../")):
+                    pending.append(urljoin(url, spec))
+
     def _measure_hmr_speed(self, framework_dir: Path, port: int) -> Tuple[float, float]:
         """Measure HMR speed by modifying a source file and timing the response."""
         # Find a source file to modify
